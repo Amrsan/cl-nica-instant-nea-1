@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="i18n.js"></script>
+
+    <title>Book Service - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Service Request Form Section */
+        .request-section {
+            padding: 80px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .request-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1a5058;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: "Montserrat", sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00989D;
+            box-shadow: 0 0 0 3px rgba(0, 152, 157, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Service Details Display */
+        .service-details-display {
+            display: none;
+            background-color: #f8fffe;
+            border: 2px solid #e0f4f4;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .service-details-display.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .service-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid #00989D;
+            box-shadow: 0 4px 12px rgba(0, 152, 157, 0.2);
+            transition: all 0.3s ease;
+            background-color: #f0f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .service-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 152, 157, 0.3);
+        }
+
+        .service-image.loading {
+            background: linear-gradient(45deg, #f0f8f8, #e0f4f4, #f0f8f8);
+            background-size: 200% 200%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        .service-image.error {
+            background-color: #f9f9f9;
+            border-color: #ddd;
+            color: #666;
+            font-size: 2rem;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .service-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #00989D;
+            background: linear-gradient(135deg, #f0f8f8, #e0f4f4);
+            border-radius: 9px;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a5058;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .service-duration {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #00989D;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Pricing Summary */
+        .pricing-summary {
+            background-color: #f0f8f8;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 2px solid #d0e8e8;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a5058;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1a5058;
+            padding-top: 15px;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #1a5058;
+        }
+
+        .total-price {
+            color: #00989D !important;
+            font-size: 1.3rem !important;
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            background-color: #00989D;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #00989D;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .request-form {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Error and Success Messages */
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .error-message {
+            background-color: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+        }
+
+        .success-message {
+            background-color: #efe;
+            color: #363;
+            border: 1px solid #cfc;
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="reg.hero.title">Book Your Service</h1>
+                <p class="hero-description" data-i18n="reg.hero.desc">Schedule your appointment with Insta Clinic. Simply fill out the form below and we'll confirm your booking within 24 hours.</p>
+            </div>
+        </section>
+
+        <!-- Service Request Form Section -->
+        <section class="request-section">
+            <h2 class="section-title" data-i18n="reg.form.title">Request Your Service</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="reg.form.desc">
+                Please provide your details below to book your appointment. All information is kept confidential and secure.
+            </p>
+
+            <form class="request-form" id="serviceRequestForm">
+                <div id="messageContainer"></div>
+
+                <!-- Service Selection -->
+                <div class="form-group full-width">
+                    <label for="serviceType" data-i18n="reg.form.service">Service Type *</label>
+                    <select id="serviceType" name="serviceType" required>
+                        <option value="" data-i18n="reg.form.service.loading">Loading services...</option>
+                    </select>
+                </div>
+
+                <!-- Service Details Display -->
+                <div id="serviceDetailsDisplay" class="service-details-display">
+                    <div class="service-info">
+                        <div id="serviceImage" class="service-image">
+                            <div class="service-image-placeholder">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <div id="serviceName" class="service-name"></div>
+                            <div id="serviceDuration" class="service-duration"></div>
+                            <div id="servicePrice" class="service-price"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" data-i18n="reg.form.fname">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" data-i18n="reg.form.lname">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-group full-width">
+                    <label for="phone" data-i18n="reg.form.phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g., +20123456789" data-i18n="reg.form.phone.placeholder" required>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group full-width">
+                    <label for="address" data-i18n="reg.form.address">Live Address (Service Address)*</label>
+                    <textarea id="address" name="address" placeholder="Please enter your service address here..." data-i18n="reg.form.address.placeholder" required></textarea>
+                </div>
+
+                <!-- Date and Time -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preferredDate" data-i18n="reg.form.date">Preferred Date *</label>
+                        <input type="date" id="preferredDate" name="preferredDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime" data-i18n="reg.form.time">Preferred Time Range *</label>
+                        <select id="preferredTime" name="preferredTime" required>
+                            <option value="" data-i18n="reg.form.time.select">Select time range</option>
+                            <option value="08:00-10:00">8:00 AM - 10:00 AM</option>
+                            <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+                            <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+                            <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+                            <option value="16:00-18:00">4:00 PM - 6:00 PM</option>
+                            <option value="18:00-20:00">6:00 PM - 8:00 PM</option>
+                            <option value="20:00-22:00">8:00 PM - 10:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Additional Notes (Optional) -->
+                <div class="form-group full-width">
+                    <label for="notes" data-i18n="reg.form.notes">Additional Notes (Optional)</label>
+                    <textarea id="notes" name="notes" placeholder="Please mention any specific requirements, symptoms, or additional information..." data-i18n="reg.form.notes.placeholder"></textarea>
+                </div>
+
+                <!-- Pricing Summary -->
+                <div id="pricingSummary" class="pricing-summary" style="display: none;">
+                    <div class="summary-title" data-i18n="reg.summary.title">
+                        <i class="fas fa-receipt"></i>
+                        Booking Summary
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label" data-i18n="reg.summary.service">Service:</span>
+                        <span id="summaryServiceName" class="summary-value">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label" data-i18n="reg.summary.duration">Duration:</span>
+                        <span id="summaryDuration" class="summary-value">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label" data-i18n="reg.summary.datetime">Date & Time:</span>
+                        <span id="summaryDateTime" class="summary-value">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label" data-i18n="reg.summary.total">Total Price:</span>
+                        <span id="summaryPrice" class="summary-value total-price">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" data-i18n="reg.form.submit">Book Appointment</button>
+            </form>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-container">
+                <h2 class="section-title" data-i18n="reg.features.title">Why Choose Insta Clinic</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="reg.features.desc">
+                    Experience professional healthcare services with the convenience and comfort you deserve.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-home feature-icon"></i>
+                        <h3 class="feature-title" data-i18n="reg.features.f1.title">Home Service Available</h3>
+                        <p class="feature-description" data-i18n="reg.features.f1.desc">Many of our services can be provided at your home for maximum convenience and comfort.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-user-md feature-icon"></i>
+                        <h3 class="feature-title" data-i18n="reg.features.f2.title">Expert Professionals</h3>
+                        <p class="feature-description" data-i18n="reg.features.f2.desc">Our team of qualified doctors and healthcare professionals ensure you receive the highest quality care.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3 class="feature-title" data-i18n="reg.features.f3.title">Flexible Scheduling</h3>
+                        <p class="feature-description" data-i18n="reg.features.f3.desc">Book appointments at times that work for you, including weekends and evening slots.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3 class="feature-title" data-i18n="reg.features.f4.title">Safe & Secure</h3>
+                        <p class="feature-description" data-i18n="reg.features.f4.desc">All services follow strict safety protocols and your personal information is kept completely confidential.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <!-- Add this within an iframe instead of redirecting -->
+    <div id="payment-iframe-container" style="display: none;">
+        <iframe id="payment-iframe" width="100%" height="600px" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // Supabase configuration (loaded from config.js)
+        const SUPABASE_URL = window.SUPABASE_CONFIG?.url || 'MISSING_CONFIG';
+        const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG?.anonKey || 'MISSING_CONFIG';
+        
+        // PayMob configuration - Add these to your config.js file
+        const PAYMOB_API_KEY = window.PAYMOB_CONFIG?.apiKey || 'MISSING_CONFIG';
+        const PAYMOB_INTEGRATION_ID = window.PAYMOB_CONFIG?.integrationId || 'MISSING_CONFIG';
+        const PAYMOB_IFRAME_ID = window.PAYMOB_CONFIG?.iframeId || 'MISSING_CONFIG';
+        const PAYMOB_HMAC_SECRET = window.PAYMOB_CONFIG?.hmacSecret || 'MISSING_CONFIG';
+        
+        // Check if config is loaded properly
+        if (SUPABASE_URL === 'MISSING_CONFIG' || SUPABASE_ANON_KEY === 'MISSING_CONFIG') {
+            console.error('Supabase configuration not loaded! Please ensure config.js exists and is properly configured.');
+        }
+        
+        if (PAYMOB_API_KEY === 'MISSING_CONFIG' || PAYMOB_INTEGRATION_ID === 'MISSING_CONFIG') {
+            console.error('PayMob configuration not loaded! Please ensure config.js exists and is properly configured.');
+        }
+        
+        // Initialize Supabase client
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Global variables
+        let services = [];
+        let selectedService = null;
+
+        // Helper to get translation
+        function getTranslation(key) {
+            const lang = document.documentElement.lang || 'en';
+            // Ensure window.translations is available
+            if (window.translations && window.translations[lang] && window.translations[lang][key]) {
+                return window.translations[lang][key];
+            }
+            // Fallback to English if the key or language is not found
+            // This is important for when the page first loads before i18n.js is fully initialized
+            return (window.translations && window.translations['en'] && window.translations['en'][key]) || key;
+        }
+
+        // Helper to generate a translation key from a service name
+        function generateServiceKey(name) {
+            return 'service.' + name.toLowerCase().replace(/ /g, '_').replace(/&/g, 'and');
+        }
+
+        // Function to load the header and footer
+        window.onload = function loadContent() {
+            const headerPromise = fetch('header.html').then(res => res.text());
+            const footerPromise = fetch('footer.html').then(res => res.text());
+
+            Promise.all([headerPromise, footerPromise])
+                .then(([headerHtml, footerHtml]) => {
+                    document.getElementById('header').innerHTML = headerHtml;
+                    document.getElementById('footer').innerHTML = footerHtml;
+                })
+                .catch(error => console.error('Error loading header/footer:', error))
+                .finally(() => {
+                    // Apply translations after all content is loaded
+                    if (window.initI18n) window.initI18n();
+                });
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('preferredDate').setAttribute('min', today);
+
+            // Load services from Supabase
+            loadServices();
+        }
+
+        // Function to load services from Supabase
+        async function loadServices() {
+            const serviceSelect = document.getElementById('serviceType');
+            
+            try {
+                const { data, error } = await supabaseClient
+                    .from('services')
+                    .select('*')
+                    .order('name');
+
+                if (error) {
+                    throw error;
+                }
+
+                services = data;
+                populateServiceDropdown();
+                
+            } catch (error) {
+                console.error('Error loading services:', error);
+                serviceSelect.innerHTML = `<option value="">${getTranslation('reg.form.service.loading')}</option>`;
+                showMessage(getTranslation('reg.js.error.load_services'), 'error');
+            }
+        }
+
+        // Function to populate service dropdown
+        function populateServiceDropdown() {
+            const serviceSelect = document.getElementById('serviceType');
+            serviceSelect.innerHTML = `<option value="">${getTranslation('reg.form.service.select')}</option>`;
+            
+            services.forEach(service => {
+                const translationKey = generateServiceKey(service.name);
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = `${getTranslation(translationKey)} - ${service.price} EGP`;
+                serviceSelect.appendChild(option);
+            });
+        }
+
+        // Function to display service details
+        function displayServiceDetails(service) {
+            const serviceDisplay = document.getElementById('serviceDetailsDisplay');
+            const serviceImage = document.getElementById('serviceImage');
+            const serviceName = document.getElementById('serviceName');
+            const serviceDuration = document.getElementById('serviceDuration');
+            const servicePrice = document.getElementById('servicePrice');
+
+            if (service) {
+                // Set loading state
+                serviceImage.className = 'service-image loading';
+                serviceImage.innerHTML = '<div class="service-image-placeholder"><i class="fas fa-spinner fa-spin"></i></div>';
+                
+                const translationKey = generateServiceKey(service.name);
+                serviceName.textContent = getTranslation(translationKey);
+                serviceDuration.innerHTML = `<i class="fas fa-clock"></i> ${getTranslation('reg.js.duration_prefix')} ${service.duration_minutes} ${getTranslation('reg.js.duration_suffix')}`;
+                servicePrice.innerHTML = `${parseFloat(service.price).toFixed(2)} EGP`;
+                
+                serviceDisplay.classList.add('show');
+                selectedService = service;
+                
+                // Handle image loading
+                loadServiceImage(service, serviceImage);
+                updatePricingSummary();
+            } else {
+                serviceDisplay.classList.remove('show');
+                selectedService = null;
+                hidePricingSummary();
+            }
+        }
+
+        // Function to load service image with fallback
+        function loadServiceImage(service, imageContainer) {
+            // Set loading state
+            imageContainer.className = 'service-image loading';
+            imageContainer.innerHTML = '<div class="service-image-placeholder"><i class="fas fa-spinner fa-spin"></i></div>';
+            
+            if (service.image_url && service.image_url.trim() !== '') {
+                const img = new Image();
+                
+                img.onload = function() {
+                    // Image loaded successfully
+                    imageContainer.className = 'service-image';
+                    imageContainer.innerHTML = `<img src="${service.image_url}" alt="${service.name}" style="width: 80%; height: 80%; object-fit: contain; border-radius: 9px;">`;
+                };
+                
+                img.onerror = function() {
+                    // Image failed to load, use fallback
+                    console.warn(`Failed to load image for ${service.name}: ${service.image_url}`);
+                    setFallbackImage(imageContainer, service);
+                };
+                
+                // Start loading
+                img.src = service.image_url;
+                
+                // Timeout fallback (in case image takes too long)
+                setTimeout(() => {
+                    if (imageContainer.className.includes('loading')) {
+                        console.warn(`Image loading timeout for ${service.name}`);
+                        setFallbackImage(imageContainer, service);
+                    }
+                }, 5000); // 5 second timeout
+                
+            } else {
+                // No image URL provided, use fallback immediately
+                setFallbackImage(imageContainer, service);
+            }
+        }
+
+        // Function to set fallback image based on service type
+        function setFallbackImage(imageContainer, service) {
+            imageContainer.className = 'service-image';
+            
+            // Get appropriate icon based on service name
+            const serviceIcon = getServiceIcon(service.name);
+            
+            imageContainer.innerHTML = `
+                <div class="service-image-placeholder">
+                    <i class="fas ${serviceIcon}"></i>
+                </div>
+            `;
+        }
+
+        // Function to get appropriate icon for service type
+        function getServiceIcon(serviceName) {
+            const name = serviceName.toLowerCase();
+            
+            if (name.includes('dental') || name.includes('tooth')) return 'fa-tooth';
+            if (name.includes('heart') || name.includes('cardio')) return 'fa-heartbeat';
+            if (name.includes('eye') || name.includes('vision')) return 'fa-eye';
+            if (name.includes('brain') || name.includes('neuro')) return 'fa-brain';
+            if (name.includes('bone') || name.includes('orthopedic')) return 'fa-bone';
+            if (name.includes('baby') || name.includes('pediatric') || name.includes('child')) return 'fa-baby';
+            if (name.includes('emergency') || name.includes('urgent')) return 'fa-ambulance';
+            if (name.includes('surgery') || name.includes('surgical')) return 'fa-procedures';
+            if (name.includes('lab') || name.includes('test') || name.includes('blood')) return 'fa-flask';
+            if (name.includes('radio') || name.includes('x-ray') || name.includes('scan')) return 'fa-x-ray';
+            if (name.includes('physio') || name.includes('therapy')) return 'fa-dumbbell';
+            if (name.includes('nursing') || name.includes('nurse')) return 'fa-user-nurse';
+            if (name.includes('derma') || name.includes('skin')) return 'fa-hand-holding-medical';
+            if (name.includes('dialysis') || name.includes('kidney')) return 'fa-lungs';
+            if (name.includes('animal') || name.includes('vet') || name.includes('pet')) return 'fa-paw';
+            if (name.includes('medicine') || name.includes('general')) return 'fa-stethoscope';
+            
+            // Default medical icon
+            return 'fa-user-md';
+        }
+
+        // Test function for fallback images (for debugging)
+        function testFallback() {
+            const testService = {
+                name: 'Test Dental Service',
+                price: 50,
+                duration_minutes: 30,
+                image_url: 'https://invalid-url-that-will-fail.com/image.jpg'
+            };
+            
+            displayServiceDetails(testService);
+            console.log('Testing fallback with invalid image URL...');
+        }
+
+        // Function to update pricing summary
+        function updatePricingSummary() {
+            if (!selectedService) {
+                hidePricingSummary();
+                return;
+            }
+
+            const pricingSummary = document.getElementById('pricingSummary');
+            const summaryServiceName = document.getElementById('summaryServiceName');
+            const summaryDuration = document.getElementById('summaryDuration');
+            const summaryDateTime = document.getElementById('summaryDateTime');
+            const summaryPrice = document.getElementById('summaryPrice');
+
+             // Use translated name and duration in the summary
+            const translationKey = generateServiceKey(selectedService.name);
+            const translatedName = getTranslation(translationKey);
+            summaryServiceName.textContent = translatedName;
+            summaryDuration.textContent = `${selectedService.duration_minutes} ${getTranslation('reg.js.duration_suffix')}`;
+            summaryPrice.textContent = `${parseFloat(selectedService.price).toFixed(2)} EGP`;
+
+            // Update date and time if available
+            const date = document.getElementById('preferredDate').value;
+            const time = document.getElementById('preferredTime').value;
+            
+            if (date && time) {
+                const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                const formattedTime = formatTime(time);
+                summaryDateTime.textContent = `${formattedDate} at ${formattedTime}`;
+            } else {
+                summaryDateTime.textContent = getTranslation('reg.summary.tobe_selected');
+            }
+
+            pricingSummary.style.display = 'block';
+        }
+
+        // Function to hide pricing summary
+        function hidePricingSummary() {
+            document.getElementById('pricingSummary').style.display = 'none';
+        }
+
+        // Function to format time range
+        function formatTime(timeRange) {
+            if (!timeRange || !timeRange.includes('-')) {
+                return timeRange; // Return as-is if not a range
+            }
+            
+            const [startTime, endTime] = timeRange.split('-');
+            
+            function formatSingleTime(time24) {
+                const [hours, minutes] = time24.split(':');
+                const hour = parseInt(hours);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                const hour12 = hour % 12 || 12;
+                const formattedHour = hour12.toString().padStart(2, '0');
+                return `${formattedHour}:${minutes || '00'} ${ampm}`;
+            }
+            
+            const formattedStart = formatSingleTime(startTime);
+            const formattedEnd = formatSingleTime(endTime);
+            
+            return `${formattedStart} - ${formattedEnd}`;
+        }
+
+        // Event listeners
+        document.getElementById('serviceType').addEventListener('change', function() {
+            const selectedServiceId = this.value;
+            if (selectedServiceId) {
+                const service = services.find(s => s.id == selectedServiceId);
+                displayServiceDetails(service);
+            } else {
+                displayServiceDetails(null);
+            }
+        });
+
+        // Update pricing summary when date/time changes
+        document.getElementById('preferredDate').addEventListener('change', updatePricingSummary);
+        document.getElementById('preferredTime').addEventListener('change', updatePricingSummary);
+
+        // Listen for language changes to re-translate dynamic content
+        window.addEventListener('language-changed', function() {
+            console.log('Language changed, re-translating services...');
+            populateServiceDropdown(); // Re-populate the dropdown with new translations
+            // If a service is already selected, re-display its details in the new language
+            if (selectedService) {
+                displayServiceDetails(selectedService);
+            }
+        });
+
+        // Form validation and submission
+        document.getElementById('serviceRequestForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const messageContainer = document.getElementById('messageContainer');
+            const submitButton = this.querySelector('.submit-button');
+            
+            // Clear previous messages
+            messageContainer.innerHTML = '';
+            
+            // Disable submit button during processing
+            submitButton.disabled = true;
+            submitButton.innerHTML = `<span class="loading"></span> ${getTranslation('reg.js.processing')}`;
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const serviceType = formData.get('serviceType');
+                const firstName = formData.get('firstName');
+                const lastName = formData.get('lastName');
+                const phone = formData.get('phone');
+                const address = formData.get('address');
+                const preferredDate = formData.get('preferredDate');
+                const preferredTime = formData.get('preferredTime');
+                const notes = formData.get('notes') || '';
+                
+                // Validate required fields
+                if (!serviceType || !firstName || !lastName || !phone || !address || !preferredDate || !preferredTime) {
+                    showMessage(getTranslation('reg.js.error.all_fields'), 'error');
+                    return;
+                }
+                
+                // Validate service is selected
+                if (!selectedService) {
+                    showMessage(getTranslation('reg.js.error.valid_service'), 'error');
+                    return;
+                }
+                
+                // Validate phone number format (basic validation)
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                if (!phoneRegex.test(phone.replace(/[\s\(\)\-]/g, ''))) {
+                    showMessage(getTranslation('reg.js.error.valid_phone'), 'error');
+                    return;
+                }
+                
+                // Validate date is not in the past
+                const selectedDate = new Date(preferredDate);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (selectedDate < today) {
+                    showMessage(getTranslation('reg.js.error.future_date'), 'error');
+                    return;
+                }
+                
+                // Prepare booking data for database
+                const bookingData = {
+                    patient_name: `${firstName.trim()} ${lastName.trim()}`,
+                    patient_address: address.trim(),
+                    contact_number: phone.trim(),
+                    notes: notes.trim(),
+                    booking_date: preferredDate,
+                    booking_time: preferredTime,
+                    status: 'pending_payment', // Changed from 'unpaid' to 'pending_payment'
+                    fee: parseFloat(selectedService.price),
+                    service_id: selectedService.id
+                };
+                
+                console.log('Inserting booking data:', bookingData);
+                
+                // Insert booking into Supabase
+                const { data: bookingResult, error } = await supabaseClient
+                    .from('bookings')
+                    .insert([bookingData])
+                    .select();
+                
+                if (error) {
+                    throw error;
+                }
+                
+                console.log('Booking created successfully:', bookingResult);
+                
+                const bookingId = bookingResult[0].id;
+                
+                // Store booking details for payment callback
+                const paymentData = {
+                    bookingId: bookingId,
+                    serviceName: selectedService.name,
+                    patientName: bookingData.patient_name,
+                    appointmentDate: preferredDate,
+                    appointmentTime: preferredTime,
+                    amount: selectedService.price
+                };
+                
+                sessionStorage.setItem('currentBooking', JSON.stringify(paymentData));
+                
+                // Initialize PayMob payment process
+                await initiatePayMobPayment(paymentData);
+                
+            } catch (error) {
+                console.error('Error creating booking:', error);
+                
+                // Show user-friendly error message
+                let errorMessage = getTranslation('reg.js.error.payment_init');
+                
+                if (error.message) {
+                    // Handle specific Supabase errors
+                    if (error.message.includes('duplicate')) {
+                        errorMessage = getTranslation('reg.js.error.duplicate');
+                    } else if (error.message.includes('permission')) {
+                        errorMessage = getTranslation('reg.js.error.permission');
+                    } else if (error.message.includes('network')) {
+                        errorMessage = getTranslation('reg.js.error.network');
+                    }
+                }
+                
+                showMessage(errorMessage, 'error');
+                
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.innerHTML = getTranslation('reg.form.submit');
+            }
+        });
+        
+        function showMessage(message, type) {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}-message`;
+            messageDiv.textContent = message;
+            messageContainer.appendChild(messageDiv);
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // PayMob integration functions
+        async function initiatePayMobPayment(bookingData) {
+            try {
+                // Step 1: Get authentication token
+                const authToken = await getPayMobAuthToken();
+                
+                // Step 2: Create order
+                const orderId = await createPayMobOrder(authToken, bookingData);
+                
+                // Step 3: Get payment key
+                const paymentKey = await getPayMobPaymentKey(authToken, orderId, bookingData);
+                
+                // Step 4: Redirect to PayMob iframe
+                redirectToPayMobIframe(paymentKey);
+                
+            } catch (error) {
+                console.error('PayMob payment initiation failed:', error);
+                showMessage(getTranslation('reg.js.error.payment_init'), 'error');
+            }
+        }
+
+        async function getPayMobAuthToken() {
+            const response = await fetch('https://accept.paymob.com/api/auth/tokens', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    api_key: PAYMOB_API_KEY
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error('Failed to get PayMob auth token: ' + (data.message || 'Unknown error'));
+            }
+            
+            return data.token;
+        }
+
+        async function createPayMobOrder(authToken, bookingData) {
+            const amountCents = Math.round(parseFloat(bookingData.amount) * 100); // Convert to cents
+            
+            const response = await fetch('https://accept.paymob.com/api/ecommerce/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    auth_token: authToken,
+                    delivery_needed: "false",
+                    amount_cents: amountCents,
+                    currency: "EGP",
+                    items: [{
+                        name: bookingData.serviceName,
+                        amount_cents: amountCents,
+                        description: `Medical appointment booking - ${bookingData.serviceName}`,
+                        quantity: 1
+                    }]
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error('Failed to create PayMob order: ' + (data.message || 'Unknown error'));
+            }
+            
+            return data.id;
+        }
+
+        async function getPayMobPaymentKey(authToken, orderId, bookingData) {
+            const amountCents = Math.round(parseFloat(bookingData.amount) * 100);
+            
+            // Get contact number from current form if available
+            const contactNumber = document.getElementById('phone')?.value || "+20XXXXXXXXX";
+            
+            const response = await fetch('https://accept.paymob.com/api/acceptance/payment_keys', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    auth_token: authToken,
+                    amount_cents: amountCents,
+                    expiration: 3600, // 1 hour
+                    order_id: orderId,
+                    billing_data: {
+                        apartment: "NA",
+                        email: "customer@example.com", // You may want to add email field to your form
+                        floor: "NA",
+                        first_name: bookingData.patientName.split(' ')[0],
+                        street: "NA",
+                        building: "NA",
+                        phone_number: contactNumber,
+                        shipping_method: "NA",
+                        postal_code: "NA",
+                        city: "Cairo",
+                        country: "EG",
+                        last_name: bookingData.patientName.split(' ').slice(1).join(' ') || "N/A",
+                        state: "Cairo"
+                    },
+                    currency: "EGP",
+                    integration_id: PAYMOB_INTEGRATION_ID,
+                    lock_order_when_paid: "false"
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error('Failed to get PayMob payment key: ' + (data.message || 'Unknown error'));
+            }
+            
+            return data.token;
+        }
+
+        function redirectToPayMobIframe(paymentKey) {
+            // Store the current booking data for callback processing
+            const currentBooking = JSON.parse(sessionStorage.getItem('currentBooking'));
+            
+            // Add additional metadata for callback processing
+            const enhancedBookingData = {
+                ...currentBooking,
+                paymentKey: paymentKey,
+                timestamp: new Date().toISOString()
+            };
+            
+            sessionStorage.setItem('currentBooking', JSON.stringify(enhancedBookingData));
+            
+            // Create the PayMob iframe URL
+            const iframeUrl = `https://accept.paymob.com/api/acceptance/iframes/${PAYMOB_IFRAME_ID}?payment_token=${paymentKey}`;
+            
+            console.log('Redirecting to PayMob iframe:', iframeUrl);
+            
+            // Direct redirect to PayMob payment page
+            window.location.href = iframeUrl;
+        }
+
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html> 

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+
+    <title>Payment Failed - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header-specific CSS to ensure proper styling when loaded dynamically */
+        #header * {
+            box-sizing: border-box;
+        }
+
+        #header header {
+            font-family: "Montserrat", sans-serif !important;
+            align-items: center;
+            flex-wrap: nowrap;
+            position: sticky;
+            top: 0;
+            margin: 0;
+            padding: 12px 24px;
+            display: flex;
+            background-color: #00989D !important;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(6, 17, 118, .08), 0 4px 12px rgb(6, 17, 118, .08);
+            z-index: 1000;
+        }
+
+        #header .container1 {
+            display: flex;
+        }
+
+        #header .container1 img {
+            width: 150px;
+            display: flex;
+            cursor: pointer;
+        }
+
+        #header nav {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: end;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        #header nav button {
+            background-color: transparent !important;
+            border: none !important;
+            cursor: pointer;
+            border-radius: 20%;
+            color: #eee !important;
+            padding: 10px;
+            text-wrap: nowrap;
+            font-family: "Montserrat", sans-serif;
+            font-size: 14px;
+        }
+
+        #header nav button:hover {
+            color: black !important;
+            font-weight: bold;
+        }
+
+        #header .btn.active {
+            color: black !important;
+            font-weight: bold;
+        }
+
+        #header #menu-toggle {
+            display: none;
+        }
+
+        /* Mobile hamburger menu styles */
+        #header .menu-button-container {
+            display: none;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1001;
+        }
+
+        #header .menu-button,
+        #header .menu-button::before,
+        #header .menu-button::after {
+            display: block;
+            background-color: white;
+            position: absolute;
+            height: 3px;
+            width: 30px;
+            border-radius: 3px;
+            transition: transform 0.25s ease;
+        }
+
+        #header .menu-button::before {
+            content: '';
+            margin-top: -8px;
+        }
+
+        #header .menu-button::after {
+            content: '';
+            margin-top: 8px;
+        }
+
+        #header #menu-toggle:checked ~ .menu-button-container .menu-button::before {
+            margin-top: 0;
+            transform: rotate(45deg);
+        }
+
+        #header #menu-toggle:checked ~ .menu-button-container .menu-button {
+            background: rgba(255, 255, 255, 0);
+        }
+
+        #header #menu-toggle:checked ~ .menu-button-container .menu-button::after {
+            margin-top: 0;
+            transform: rotate(-45deg);
+        }
+
+        #header .mobile-menu {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            padding: 0;
+            background-color: #00989D;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            z-index: 999;
+        }
+
+        #header .mobile-menu button {
+            background-color: transparent !important;
+            border: none !important;
+            cursor: pointer;
+            color: #eee !important;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+            display: block;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        #header .mobile-menu button:last-child {
+            border-bottom: none !important;
+        }
+
+        #header .mobile-menu button:hover {
+            color: black !important;
+            font-weight: bold;
+        }
+
+        #header #menu-toggle:checked ~ .mobile-menu {
+            max-height: 300px;
+        }
+
+        @media only screen and (max-width: 767px) {
+            #header nav button {
+                display: none;
+            }
+
+            #header .container1 img {
+                width: 120px;
+            }
+
+            #header header {
+                padding: 12px 10px;
+            }
+
+            #header .menu-button-container {
+                display: flex;
+            }
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .failure-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .failure-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(45deg, #dc3545, #c82333, #dc3545);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(220, 53, 69, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 80%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-5deg); }
+        }
+
+        .failure-icon {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 48px;
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+            animation: failurePulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes failurePulse {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3); }
+            100% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(220, 53, 69, 0.4); }
+        }
+
+        .failure-title {
+            color: #dc3545;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .failure-message {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .error-details {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #dc3545;
+        }
+
+        .error-details h3 {
+            color: #dc3545;
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(220, 53, 69, 0.1);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .error-code {
+            color: #dc3545;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .help-section {
+            background: linear-gradient(135deg, #fff5f5, #fef2f2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .help-section h4 {
+            color: #dc3545;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .help-section h5 {
+            color: #00989D;
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .help-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .help-section li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .help-section li i {
+            color: #dc3545;
+            margin-top: 2px;
+            width: 16px;
+        }
+
+        .contact-info {
+            background: rgba(0, 152, 157, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 152, 157, 0.2);
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact-info strong {
+            color: #00989D;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-retry {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .btn-retry:hover {
+            background: linear-gradient(135deg, #c82333, #a71e2a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00989D, #006b73);
+            color: white;
+            border-color: #00989D;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #006b73, #004d52);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 152, 157, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00989D;
+            border-color: #00989D;
+        }
+
+        .btn-secondary:hover {
+            background: #00989D;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 152, 157, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .failure-container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+
+            .failure-title {
+                font-size: 24px;
+            }
+
+            .failure-message {
+                font-size: 16px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Load header dynamically -->
+    <div id="header"></div>
+
+    <main>
+        <div class="failure-container">
+            <div class="floating-elements">
+                <i class="floating-element fas fa-exclamation-triangle fa-2x"></i>
+                <i class="floating-element fas fa-times-circle fa-lg"></i>
+                <i class="floating-element fas fa-credit-card fa-lg"></i>
+            </div>
+
+            <div class="failure-icon">
+                <i class="fas fa-times"></i>
+            </div>
+
+            <h1 class="failure-title" data-i18n="failure.title">Payment Failed</h1>
+            <p class="failure-message" data-i18n="failure.message">
+                We're sorry, but your payment could not be processed. Please try again or contact our support team for assistance.
+            </p>
+
+            <div class="error-details" id="errorDetails">
+                <h3><i class="fas fa-exclamation-circle"></i> Transaction Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Transaction ID:</span>
+                    <span class="detail-value" id="transactionId">Loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Error Code:</span>
+                    <span class="detail-value error-code" id="errorCode">Loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Service:</span>
+                    <span class="detail-value" id="serviceName">Loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value" id="amount">Loading...</span>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h4><i class="fas fa-question-circle"></i> Common Solutions</h4>
+                <ul>
+                    <li><i class="fas fa-credit-card"></i> Check that your card details are correct and try again</li>
+                    <li><i class="fas fa-wallet"></i> Ensure you have sufficient funds in your account</li>
+                    <li><i class="fas fa-globe"></i> Try using a different payment method</li>
+                    <li><i class="fas fa-refresh"></i> Clear your browser cache and try again</li>
+                </ul>
+
+                <div class="contact-info">
+                    <h5><i class="fas fa-headset"></i> Need Help?</h5>
+                    <p>If the problem persists, please contact our support team:</p>
+                    <p><strong>Available:</strong> 24/7 Customer Support</p>
+                    <p><strong>Response:</strong> We'll help you resolve this quickly</p>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="retryPayment()" class="btn btn-retry">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+                <a href="registration.html" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Modify Booking
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load footer dynamically -->
+    <div id="footer"></div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // Load header and footer first
+        function loadContent() {
+             // Load header
+            fetch('header.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Header not found');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Remove the style tag from header content to prevent conflicts
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const styleTag = tempDiv.querySelector('style');
+                    if (styleTag) {
+                        styleTag.remove();
+                    }
+                    
+                    document.getElementById('header').innerHTML = tempDiv.innerHTML;
+                    
+                    // Initialize any header scripts if needed
+                    const headerScripts = document.getElementById('header').querySelectorAll('script');
+                    headerScripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.head.appendChild(newScript);
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    // Fallback header if main header fails to load
+                    document.getElementById('header').innerHTML = `
+                        <header style="background: #1a5058; color: white; padding: 1rem; text-align: center;">
+                            <h1 style="margin: 0;">Insta Clinic</h1>
+                        </header>
+                    `;
+                });
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Footer not found');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    // Fallback footer if main footer fails to load
+                    document.getElementById('footer').innerHTML = `
+                        <footer style="background: #1a5058; color: white; padding: 1rem; text-align: center; margin-top: 2rem;">
+                            <p>&copy; 2024 Insta Clinic. All rights reserved.</p>
+                        </footer>
+                    `;
+                });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+
+        // Load error details when page loads
+        window.onload = function() {
+            loadErrorDetails();
+        }
+
+        function loadErrorDetails() {
+            try {
+                // Get payment result from our callback system
+                const paymentResultStr = sessionStorage.getItem('paymentResult');
+                
+                if (paymentResultStr) {
+                    const paymentResult = JSON.parse(paymentResultStr);
+                    console.log('Payment failure result loaded:', paymentResult);
+                    
+                    // Update the display with payment result data
+                    document.getElementById('transactionId').textContent = paymentResult.transactionId || 'N/A';
+                    
+                    // Determine error message based on response code and status
+                    let errorMessage = 'Payment failed';
+                    if (paymentResult.responseCode) {
+                        errorMessage = `Error Code: ${paymentResult.responseCode}`;
+                    } else if (paymentResult.status === 'failed') {
+                        errorMessage = 'Transaction declined';
+                    }
+                    document.getElementById('errorCode').textContent = errorMessage;
+                    
+                    // Use booking data from payment result
+                    const bookingData = paymentResult.bookingData || {};
+                    
+                    if (bookingData.serviceName) {
+                        document.getElementById('serviceName').textContent = bookingData.serviceName;
+                    } else {
+                        document.getElementById('serviceName').textContent = 'Medical Service';
+                    }
+                    
+                    if (paymentResult.amount) {
+                        document.getElementById('amount').textContent = `${parseFloat(paymentResult.amount).toFixed(2)} ${paymentResult.currency || 'EGP'}`;
+                    } else if (bookingData.amount) {
+                        document.getElementById('amount').textContent = `${parseFloat(bookingData.amount).toFixed(2)} EGP`;
+                    } else {
+                        document.getElementById('amount').textContent = 'Amount not available';
+                    }
+                    
+                    // Store booking data for retry functionality
+                    if (bookingData && Object.keys(bookingData).length > 0) {
+                        sessionStorage.setItem('failedBookingData', JSON.stringify(bookingData));
+                    }
+                    
+                    // Clean up payment result
+                    sessionStorage.removeItem('paymentResult');
+                    
+                } else {
+                    // Fallback: try to get data from URL parameters (for backward compatibility)
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const transactionId = urlParams.get('id') || urlParams.get('transaction_id') || 'N/A';
+                    const errorOccurred = urlParams.get('error_occured') || urlParams.get('error') || 'Payment failed';
+                    
+                    document.getElementById('transactionId').textContent = transactionId;
+                    document.getElementById('errorCode').textContent = errorOccurred;
+                    
+                    // Try to get booking data from session storage
+                    const bookingDataStr = sessionStorage.getItem('currentBooking');
+                    if (bookingDataStr) {
+                        const bookingData = JSON.parse(bookingDataStr);
+                        loadBookingDataFallback(bookingData);
+                        sessionStorage.setItem('failedBookingData', bookingDataStr);
+                        sessionStorage.removeItem('currentBooking');
+                    } else {
+                        // No data available, show generic failure
+                        loadGenericFailure();
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error loading error details:', error);
+                loadGenericFailure();
+            }
+        }
+
+        // Fallback function for loading booking data from old format
+        function loadBookingDataFallback(bookingData) {
+            if (bookingData.serviceName) {
+                document.getElementById('serviceName').textContent = bookingData.serviceName;
+            }
+            
+            if (bookingData.amount) {
+                document.getElementById('amount').textContent = `${parseFloat(bookingData.amount).toFixed(2)} EGP`;
+            }
+        }
+
+        // Generic failure for when no booking data is available
+        function loadGenericFailure() {
+            document.getElementById('serviceName').textContent = 'Medical Service';
+            document.getElementById('amount').textContent = 'Payment amount';
+            document.getElementById('errorCode').textContent = 'Transaction failed';
+        }
+
+        function retryPayment() {
+            // Get the failed booking data from sessionStorage
+            const failedBookingStr = sessionStorage.getItem('failedBookingData');
+            const currentBookingStr = sessionStorage.getItem('currentBooking');
+            
+            let bookingData = {};
+            
+            if (failedBookingStr) {
+                bookingData = JSON.parse(failedBookingStr);
+                sessionStorage.removeItem('failedBookingData');
+            } else if (currentBookingStr) {
+                bookingData = JSON.parse(currentBookingStr);
+                sessionStorage.removeItem('currentBooking');
+            }
+            
+            if (Object.keys(bookingData).length > 0) {
+                // Store the booking data for the registration form to pick up
+                sessionStorage.setItem('retryBookingData', JSON.stringify(bookingData));
+                
+                // Redirect back to registration form with retry flag
+                window.location.href = 'registration.html?retry=true';
+            } else {
+                // If no booking data, just redirect to registration form
+                window.location.href = 'registration.html';
+            }
+        }
+    </script>
+</body>
+
+</html> 

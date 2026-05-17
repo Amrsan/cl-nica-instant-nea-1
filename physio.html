@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>Physiotherapy Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        .approach-list-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+        .approach-list-item .fa-check-circle {
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+        /* RTL styles for checkmark list */
+        [dir="rtl"] .approach-list-item {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list-item .fa-check-circle {
+            left: auto;
+            right: 0;
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Treatments Section */
+        .treatments-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .treatments-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .treatment-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .treatment-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .treatment-icon {
+            font-size: 2.5rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .treatment-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .treatment-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Before After Section */
+        .before-after-section {
+            padding: 80px 20px;
+        }
+
+        .before-after-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .before-after-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .before-after-images {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .before-after-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .before-after-label {
+            background-color: #1a5058;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-weight: 600;
+        }
+
+        .before-after-content {
+            padding: 20px;
+        }
+
+        .before-after-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1a5058;
+        }
+
+        .before-after-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .treatments-grid,
+            .before-after-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="physio.hero.title">Physiotherapy Services</h1>
+                <p class="hero-description" data-i18n="physio.hero.desc">Expert rehabilitation and physical therapy for all ages and conditions. Our
+                    experienced physiotherapists provide personalized care to help you move better, feel better, and
+                    live better.</p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="physio.hero.cta">Book an Appointment</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="physio.services.title">Our Physiotherapy Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="physio.services.desc">
+                At Insta Clinic, we offer a comprehensive range of physiotherapy services tailored to meet the unique
+                needs of each patient. Our experienced physiotherapists utilize evidence-based techniques and
+                state-of-the-art equipment to help you recover from injury, manage chronic conditions, and improve your
+                overall quality of life.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Orthopedic Physiotherapy">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="physio.ortho.title">Orthopedic Physiotherapy</h3>
+                        <p class="service-card-description" data-i18n="physio.ortho.desc">Specialized treatment for musculoskeletal injuries, joint
+                            problems, post-surgical rehabilitation, and sports injuries to restore function and reduce
+                            pain.</p>
+                        <ul class="service-card-list">
+                            <li data-i18n="physio.ortho.l1">Assessment and treatment of joint and muscle pain</li>
+                            <li data-i18n="physio.ortho.l2">Post-fracture and post-surgical rehabilitation</li>
+                            <li data-i18n="physio.ortho.l3">Manual therapy and mobilization</li>
+                            <li data-i18n="physio.ortho.l4">Exercise programs for strength and flexibility</li>
+                            <li data-i18n="physio.ortho.l5">Sports injury prevention and recovery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Neurological Physiotherapy">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="physio.neuro.title">Neurological Physiotherapy</h3>
+                        <p class="service-card-description" data-i18n="physio.neuro.desc">Specialized care for patients with neurological conditions
+                            such as stroke, Parkinson's disease, multiple sclerosis, and spinal cord injuries.</p>
+                        <ul class="service-card-list">
+                            <li data-i18n="physio.neuro.l1">Stroke rehabilitation</li>
+                            <li data-i18n="physio.neuro.l2">Balance and coordination training</li>
+                            <li data-i18n="physio.neuro.l3">Gait and mobility improvement</li>
+                            <li data-i18n="physio.neuro.l4">Functional electrical stimulation</li>
+                            <li data-i18n="physio.neuro.l5">Home exercise and caregiver education</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Sports Physiotherapy">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="physio.sports.title">Sports Physiotherapy</h3>
+                        <p class="service-card-description" data-i18n="physio.sports.desc">Specialized treatment for athletes focusing on injury
+                            prevention, performance enhancement, and rehabilitation to help you return to your sport
+                            safely.</p>
+                        <ul class="service-card-list">
+                            <li data-i18n="physio.sports.l1">Sports injury assessment and management</li>
+                            <li data-i18n="physio.sports.l2">Rehabilitation for sprains, strains, and tears</li>
+                            <li data-i18n="physio.sports.l3">Performance enhancement programs</li>
+                            <li data-i18n="physio.sports.l4">Return-to-play planning</li>
+                            <li data-i18n="physio.sports.l5">Education on injury prevention</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatments Section -->
+        <section class="treatments-section">
+            <div class="treatments-container">
+                <h2 class="section-title" data-i18n="physio.techniques.title">Specialized Techniques</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="physio.techniques.desc">
+                    Our physiotherapy clinic employs a variety of evidence-based techniques and modalities to address
+                    your specific condition and help you achieve optimal recovery and function.
+                </p>
+
+                <div class="treatments-grid">
+                    <div class="treatment-item">
+                        <i class="fas fa-hands treatment-icon"></i>
+                        <h3 class="treatment-title" data-i18n="physio.techniques.t1.title">Manual Therapy</h3>
+                        <p class="treatment-description" data-i18n="physio.techniques.t1.desc">Hands-on techniques including joint mobilization, soft tissue
+                            manipulation, and myofascial release to improve mobility and reduce pain.</p>
+
+                    </div>
+
+                    <div class="treatment-item">
+                        <i class="fas fa-bolt treatment-icon"></i>
+                        <h3 class="treatment-title" data-i18n="physio.techniques.t2.title">Electrotherapy</h3>
+                        <p class="treatment-description" data-i18n="physio.techniques.t2.desc">Therapeutic use of electrical energy including TENS,
+                            ultrasound, and electrical stimulation to reduce pain, improve circulation, and promote
+                            healing.</p>
+                    </div>
+
+                    <div class="treatment-item">
+                        <i class="fas fa-dumbbell treatment-icon"></i>
+                        <h3 class="treatment-title" data-i18n="physio.techniques.t3.title">Therapeutic Exercise</h3>
+                        <p class="treatment-description" data-i18n="physio.techniques.t3.desc">Customized exercise programs designed to improve strength,
+                            flexibility, balance, and coordination specific to your condition and goals.</p>
+                    </div>
+
+                    <div class="treatment-item">
+                        <i class="fas fa-water treatment-icon"></i>
+                        <h3 class="treatment-title" data-i18n="physio.techniques.t4.title">Hydrotherapy</h3>
+                        <p class="treatment-description" data-i18n="physio.techniques.t4.desc">Water-based therapy that utilizes the properties of water to
+                            facilitate movement, reduce pain, and improve function in a supportive environment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="before-after-section">
+            <div class="before-after-container">
+                <h2 class="section-title" data-i18n="physio.approach.title">Our Approach to Physiotherapy</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="physio.approach.desc">
+                    At Insta Clinic, we believe in a patient-centered, holistic approach to physiotherapy that addresses
+                    not just the symptoms but the underlying causes of your condition.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-top: 40px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Physiotherapy Session"
+                            style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #1a5058;" data-i18n="physio.approach.subtitle">Personalized Care Plans</h3>
+                        <p style="color: #666; line-height: 1.8; margin-bottom: 20px;" data-i18n="physio.approach.subdesc">
+                            We understand that every patient is unique, with different needs, goals, and challenges.
+                            That's why we develop individualized treatment plans tailored specifically to your
+                            condition, lifestyle, and recovery goals.
+                        </p>
+                        <ul style="list-style: none; margin-top: 20px;">
+                            <li class="approach-list-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span data-i18n="physio.approach.l1" style="display: inline-block;">Comprehensive initial assessment to understand your condition</span>
+                            </li>
+                            <li class="approach-list-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span data-i18n="physio.approach.l2" style="display: inline-block;">Collaborative goal-setting with your input</span>
+                            </li>
+                            <li class="approach-list-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span data-i18n="physio.approach.l3" style="display: inline-block;">Regular progress evaluations and plan adjustments</span>
+                            </li>
+                            <li class="approach-list-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span data-i18n="physio.approach.l4" style="display: inline-block;">Home exercise programs to complement in-clinic treatments</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Physiotherapy Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our team of highly qualified physiotherapists brings years of experience and specialized expertise to provide you with the highest standard of care.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Dr. James Wilson">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. James Wilson</h3>
+                            <p class="team-member-role">Senior Physiotherapist</p>
+                            <p class="team-member-bio">With over 15 years of experience, Dr. Wilson specializes in orthopedic rehabilitation and sports injuries, helping patients return to their optimal level of function.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sarah Martinez">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Sarah Martinez</h3>
+                            <p class="team-member-role">Neurological Physiotherapist</p>
+                            <p class="team-member-bio">Sarah specializes in neurological rehabilitation, helping patients with conditions such as stroke, Parkinson's disease, and multiple sclerosis improve their mobility and quality of life.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Michael Chen">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Michael Chen</h3>
+                            <p class="team-member-role">Sports Physiotherapist</p>
+                            <p class="team-member-bio">Michael has extensive experience working with athletes at all levels, focusing on injury prevention, performance enhancement, and specialized rehabilitation techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Start Your Recovery Journey Today</h2>
+                <p class="cta-description">Whether you're recovering from an injury, managing a chronic condition, or looking to improve your physical performance, our expert physiotherapists are here to help you achieve your goals.</p>
+                <a href="#" class="cta-button">Book Your Consultation</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

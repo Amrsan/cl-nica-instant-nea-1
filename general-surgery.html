@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>General Surgery Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Treatments Section */
+        .treatments-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .treatments-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .treatment-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .treatment-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .treatment-icon {
+            font-size: 2.5rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .treatment-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .treatment-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Before After Section */
+        .before-after-section {
+            padding: 80px 20px;
+        }
+
+        .before-after-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .before-after-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .before-after-images {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .before-after-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .before-after-label {
+            background-color: #1a5058;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-weight: 600;
+        }
+
+        .before-after-content {
+            padding: 20px;
+        }
+
+        .before-after-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1a5058;
+        }
+
+        .before-after-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .treatments-grid,
+            .before-after-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .approach-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .approach-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list li:before {
+            left: auto;
+            right: 0;
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="gensurg.hero.title">General Surgery Services</h1>
+                <p class="hero-description" data-i18n="gensurg.hero.desc">
+                    Diagnose all surgical cases quickly and specifically and provide the appropriate authority to
+                    perform the required surgery.
+                </p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="gensurg.hero.cta">Book a
+                    Surgical Consultation</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <!-- <section class="service-details">
+            <h2 class="section-title">Our General Surgery Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;">
+                Insta Clinic offers a full spectrum of general surgical procedures, from minimally invasive techniques
+                to complex operations. Our multidisciplinary team utilizes the latest technology and evidence-based
+                practices to deliver optimal outcomes for every patient.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1504439468489-c8920d796a29?auto=format&fit=crop&w=800&q=80"
+                        alt="Laparoscopic Surgery">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Laparoscopic (Keyhole) Surgery</h3>
+                        <p class="service-card-description">
+                            Minimally invasive procedures for gallbladder removal, appendectomy, hernia repair, and
+                            more. Benefits include smaller incisions, less pain, and faster recovery.
+                        </p>
+                        <ul class="service-card-list">
+                            <li>Gallbladder removal (cholecystectomy)</li>
+                            <li>Appendectomy</li>
+                            <li>Hernia repair (inguinal, umbilical, incisional)</li>
+                            <li>Exploratory laparoscopy</li>
+                            <li>Shorter hospital stay and recovery time</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&w=800&q=80"
+                        alt="Hernia Surgery">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Hernia Surgery</h3>
+                        <p class="service-card-description">
+                            Expert repair of inguinal, umbilical, and incisional hernias using both open and
+                            laparoscopic techniques for durable, long-term results.
+                        </p>
+                        <ul class="service-card-list">
+                            <li>Inguinal hernia repair</li>
+                            <li>Umbilical hernia repair</li>
+                            <li>Incisional and ventral hernia repair</li>
+                            <li>Minimally invasive and open approaches</li>
+                            <li>Mesh and non-mesh options</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/2324837/pexels-photo-2324837.jpeg?auto=compress&w=800&q=80"
+                        alt="Breast & Thyroid Surgery">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Breast & Thyroid Surgery</h3>
+                        <p class="service-card-description">
+                            Surgical management of benign and malignant breast and thyroid conditions, including
+                            biopsies, lumpectomies, mastectomies, and thyroidectomies.
+                        </p>
+                        <ul class="service-card-list">
+                            <li>Breast lump evaluation and biopsy</li>
+                            <li>Lumpectomy and mastectomy</li>
+                            <li>Thyroid nodule assessment and biopsy</li>
+                            <li>Partial and total thyroidectomy</li>
+                            <li>Parathyroid surgery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Treatments Section -->
+        <!-- <section class="treatments-section">
+            <div class="treatments-container">
+                <h2 class="section-title">Specialized Surgical Procedures</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our surgeons are skilled in a variety of advanced procedures, ensuring safe and effective treatment
+                    tailored to your needs.
+                </p>
+
+                <div class="treatments-grid">
+                    <div class="treatment-item">
+                        <i class="fas fa-user-md treatment-icon"></i>
+                        <h3 class="treatment-title">Appendectomy</h3>
+                        <p class="treatment-description">
+                            Emergency and elective removal of the appendix, performed with minimally invasive techniques
+                            for rapid recovery.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <i class="fas fa-heartbeat treatment-icon"></i>
+                        <h3 class="treatment-title">Gallbladder Surgery (Cholecystectomy)</h3>
+                        <p class="treatment-description">
+                            Laparoscopic and open removal of the gallbladder for gallstones, infections, and other
+                            biliary conditions.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <i class="fas fa-procedures treatment-icon"></i>
+                        <h3 class="treatment-title">Hemorrhoid & Anal Surgery</h3>
+                        <p class="treatment-description">
+                            Surgical and non-surgical management of hemorrhoids, anal fissures, fistulas, and pilonidal
+                            disease.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <i class="fas fa-stethoscope treatment-icon"></i>
+                        <h3 class="treatment-title">Skin & Soft Tissue Surgery</h3>
+                        <p class="treatment-description">
+                            Excision of cysts, lipomas, abscess drainage, and treatment of skin lesions with a focus on
+                            minimal scarring.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Approach Section -->
+        <section class="before-after-section">
+            <div class="before-after-container">
+                <h2 class="section-title" data-i18n="gensurg.approach.title">Our Surgical Approach</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;"
+                    data-i18n="gensurg.approach.desc">
+                    The ability to deal with superficial and deep wounds and thus repair them in a cosmetic manner and
+                    without leaving any traces.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-top: 40px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80"
+                            alt="General Surgery Team"
+                            style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #1a5058;"
+                            data-i18n="gensurg.approach.subtitle">Personalized Surgical Care
+                        </h3>
+                        <p style="color: #666; line-height: 1.8; margin-bottom: 20px;"
+                            data-i18n="gensurg.approach.subdesc">
+                            Every patient receives a customized treatment plan, clear communication, and compassionate
+                            care from our multidisciplinary team.
+                        </p>
+                        <ul class="approach-list">
+                            <li data-i18n="gensurg.approach.l1">
+
+                                Thorough preoperative evaluation and risk assessment
+                            </li>
+                            <li data-i18n="gensurg.approach.l2">
+
+                                Minimally invasive options whenever possible
+                            </li>
+                            <li data-i18n="gensurg.approach.l3">
+
+                                Comprehensive postoperative follow-up and recovery support
+                            </li>
+                            <li data-i18n="gensurg.approach.l4">
+
+                                Patient education and family involvement in care decisions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <style>
+            .approach-list-item {
+                margin-bottom: 15px;
+                padding-left: 30px;
+                position: relative;
+                color: #666;
+                line-height: 1.6;
+            }
+
+            .approach-list-item .fas.fa-check-circle {
+                color: #00989D;
+                position: absolute;
+                left: 0;
+            }
+
+            [dir="rtl"] .approach-list-item {
+                padding-left: 0;
+                padding-right: 30px;
+            }
+
+            [dir="rtl"] .approach-list-item .fas.fa-check-circle {
+                left: auto;
+                right: 0;
+            }
+        </style>
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if (window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

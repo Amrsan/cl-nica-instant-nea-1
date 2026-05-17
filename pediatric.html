@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>Pediatric Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Technology Section */
+        .technology-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .technology-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .technology-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .technology-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .technology-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .technology-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .technology-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1a5058;
+        }
+
+        .technology-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .technology-list {
+            list-style: none;
+        }
+
+        .technology-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .technology-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .technology-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+
+        [dir="rtl"] .technology-list li:before {
+            left: auto;
+            right: 0;
+        }
+
+        /* Conditions Section */
+        .conditions-section {
+            padding: 80px 20px;
+        }
+
+        .conditions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .condition-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .condition-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .condition-icon {
+            font-size: 2.5rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .condition-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .condition-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .conditions-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .technology-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="pediatric.hero.title">Pediatric Services</h1>
+                <p class="hero-description" data-i18n="pediatric.hero.desc">
+                    Compassionate, expert care for infants, children, and adolescents. Our pediatricians at Insta Clinic
+                    provide preventive care, diagnosis, and treatment for a wide range of childhood conditions, ensuring
+                    your child's health and development at every stage.
+                </p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="pediatric.hero.cta">Book a Pediatric Appointment</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="pediatric.services.title">Our Pediatric Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="pediatric.services.desc">
+                Insta Clinic offers comprehensive pediatric care, from routine checkups and immunizations to the
+                management of acute and chronic illnesses. Our team is dedicated to supporting your child's physical,
+                emotional, and developmental needs.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg?auto=compress&w=800&q=80"
+                        alt="Well-Child Visits">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="pediatric.well.title">Well-Child Visits & Immunizations</h3>
+                        <p class="service-card-description" data-i18n="pediatric.well.desc">
+                            Regular health checkups, growth monitoring, and vaccinations to keep your child healthy and
+                            protected from preventable diseases.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="pediatric.well.l1">Comprehensive physical exams</li>
+                            <li data-i18n="pediatric.well.l2">Growth and development tracking</li>
+                            <li data-i18n="pediatric.well.l3">Routine and catch-up immunizations</li>
+                            <li data-i18n="pediatric.well.l4">Vision and hearing screening</li>
+                            <li data-i18n="pediatric.well.l5">Parental guidance and anticipatory advice</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3933275/pexels-photo-3933275.jpeg?auto=compress&w=800&q=80"
+                        alt="Acute Illness Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="pediatric.acute.title">Acute Illness & Injury Care</h3>
+                        <p class="service-card-description" data-i18n="pediatric.acute.desc">
+                            Prompt evaluation and treatment for fevers, infections, respiratory illnesses, minor
+                            injuries, and other urgent pediatric concerns.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="pediatric.acute.l1">Fever and infection management</li>
+                            <li data-i18n="pediatric.acute.l2">Respiratory and ear infections</li>
+                            <li data-i18n="pediatric.acute.l3">Minor injury and wound care</li>
+                            <li data-i18n="pediatric.acute.l4">Allergy and asthma attacks</li>
+                            <li data-i18n="pediatric.acute.l5">Same-day sick visits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3662835/pexels-photo-3662835.jpeg?auto=compress&w=800&q=80"
+                        alt="Chronic Conditions">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="pediatric.chronic.title">Chronic Conditions & Developmental Care</h3>
+                        <p class="service-card-description" data-i18n="pediatric.chronic.desc">
+                            Ongoing management of asthma, allergies, diabetes, and developmental or behavioral concerns,
+                            with a focus on family-centered care.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="pediatric.chronic.l1">Asthma and allergy management</li>
+                            <li data-i18n="pediatric.chronic.l2">Diabetes care and education</li>
+                            <li data-i18n="pediatric.chronic.l3">Developmental and behavioral assessments</li>
+                            <li data-i18n="pediatric.chronic.l4">Care coordination with specialists</li>
+                            <li data-i18n="pediatric.chronic.l5">Support for chronic and complex conditions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="technology-section">
+            <div class="technology-container">
+                <h2 class="section-title" data-i18n="pediatric.tech.title">Child-Friendly Technology & Facilities</h2>
+                <div class="technology-content">
+                    <div class="technology-image">
+                        <img src="https://images.pexels.com/photos/3661350/pexels-photo-3661350.jpeg?auto=compress&w=800&q=80"
+                            alt="Pediatric Technology">
+                    </div>
+                    <div class="technology-text">
+                        <h3 data-i18n="pediatric.tech.subtitle">Modern, Safe, and Comfortable Environment</h3>
+                        <p data-i18n="pediatric.tech.desc">
+                            Our clinic is equipped with advanced pediatric medical technology and a welcoming
+                            environment designed to make children and families feel at ease. We use gentle,
+                            age-appropriate approaches for all procedures and diagnostics.
+                        </p>
+                        <ul class="technology-list">
+                            <li data-i18n="pediatric.tech.l1">Digital growth and development tracking</li>
+                            <li data-i18n="pediatric.tech.l2">Child-friendly vaccination and testing rooms</li>
+                            <li data-i18n="pediatric.tech.l3">Non-invasive diagnostic tools</li>
+                            <li data-i18n="pediatric.tech.l4">Comfortable play and waiting areas</li>
+                            <li data-i18n="pediatric.tech.l5">Family education resources</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conditions Section -->
+        <section class="conditions-section">
+            <div class="conditions-container">
+                <h2 class="section-title" data-i18n="pediatric.conditions.title">Common Pediatric Conditions We Treat</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="pediatric.conditions.desc">
+                    Our pediatricians are experienced in diagnosing and managing a wide range of childhood illnesses and
+                    developmental concerns.
+                </p>
+
+                <div class="conditions-grid">
+                    <div class="condition-item">
+                        <i class="fas fa-baby condition-icon"></i>
+                        <h3 class="condition-title" data-i18n="pediatric.conditions.c1.title">Respiratory Infections</h3>
+                        <p class="condition-description" data-i18n="pediatric.conditions.c1.desc">Treatment for colds, flu, bronchitis, pneumonia, and other
+                            common respiratory illnesses in children.</p>
+                    </div>
+
+                    <div class="condition-item">
+                        <i class="fas fa-allergies condition-icon"></i>
+                        <h3 class="condition-title" data-i18n="pediatric.conditions.c2.title">Asthma & Allergies</h3>
+                        <p class="condition-description" data-i18n="pediatric.conditions.c2.desc">Comprehensive care for asthma, seasonal allergies, eczema, and
+                            food allergies.</p>
+                    </div>
+
+                    <div class="condition-item">
+                        <i class="fas fa-syringe condition-icon"></i>
+                        <h3 class="condition-title" data-i18n="pediatric.conditions.c3.title">Immunizations</h3>
+                        <p class="condition-description" data-i18n="pediatric.conditions.c3.desc">Routine and catch-up vaccinations to protect your child from
+                            preventable diseases.</p>
+                    </div>
+
+                    <div class="condition-item">
+                        <i class="fas fa-child condition-icon"></i>
+                        <h3 class="condition-title" data-i18n="pediatric.conditions.c4.title">Growth & Development</h3>
+                        <p class="condition-description" data-i18n="pediatric.conditions.c4.desc">Monitoring and support for healthy growth, nutrition, and
+                            developmental milestones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Pediatric Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our board-certified pediatricians and caring staff are dedicated to providing the best possible care for your child in a friendly, supportive environment.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/3662630/pexels-photo-3662630.jpeg?auto=compress&w=800&q=80" alt="Dr. Emily Carter">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Emily Carter</h3>
+                            <p class="team-member-role">Lead Pediatrician</p>
+                            <p class="team-member-bio">Dr. Carter specializes in preventive care and childhood development, ensuring every child receives personalized attention and support.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/6749771/pexels-photo-6749771.jpeg?auto=compress&w=800&q=80" alt="Dr. Ahmed Hassan">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Ahmed Hassan</h3>
+                            <p class="team-member-role">Pediatric Allergy Specialist</p>
+                            <p class="team-member-bio">Dr. Hassan provides expert care for children with allergies and asthma, helping families manage symptoms and improve quality of life.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/5083010/pexels-photo-5083010.jpeg?auto=compress&w=800&q=80" alt="Dr. Sara Kim">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Sara Kim</h3>
+                            <p class="team-member-role">Developmental Pediatrician</p>
+                            <p class="team-member-bio">Dr. Kim focuses on developmental and behavioral pediatrics, supporting children and families through every stage of growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Book Your Child's Appointment</h2>
+                <p class="cta-description">Our pediatric team is here to support your child's health and well-being. Schedule a visit today for expert, compassionate care.</p>
+                <a href="#" class="cta-button">Book Now</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

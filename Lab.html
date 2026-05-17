@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Sampling Services - Insta Clinic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+       .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        .treatments-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .treatments-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .treatment-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .treatment-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .treatment-icon {
+            font-size: 2.2rem;
+            color: #00989D;
+            margin-bottom: 10px;
+        }
+
+        .treatment-title {
+            color: #1a5058;
+            font-size: 1.08rem;
+            margin-bottom: 8px;
+        }
+
+        .treatment-description {
+            color: #555;
+            font-size: 0.97rem;
+        }
+
+        .approach-section {
+            padding: 80px 20px;
+        }
+
+        .approach-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .approach-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .approach-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .approach-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1a5058;
+        }
+
+        .approach-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .approach-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .approach-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list li:before {
+            left: auto;
+            right: 0;
+        }
+
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .treatments-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .approach-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="lab.hero.title">Lab Sampling Services</h1>
+                <p class="hero-description" data-i18n="lab.hero.desc">
+                    Fast, accurate, and convenient laboratory sampling at your doorstep. Insta Clinic’s professional
+                    team ensures safe sample collection and reliable results, supporting your health and your
+                    physician’s decisions.
+                </p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="lab.hero.cta">Book a Lab Sampling Visit</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="lab.services.title">Our Lab Sampling Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="lab.services.desc">
+                We offer a wide range of laboratory sample collection services, including blood, urine, stool, and swab
+                tests. Our team follows strict protocols for hygiene and accuracy, ensuring your comfort and safety at
+                every step.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/2280547/pexels-photo-2280547.jpeg?auto=compress&w=800&q=80"
+                        alt="Blood Sampling">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="lab.blood.title">Blood Sampling</h3>
+                        <p class="service-card-description" data-i18n="lab.blood.desc">
+                            Professional blood draws for routine and specialized tests, performed with sterile technique
+                            and minimal discomfort.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="lab.blood.l1">Routine blood tests (CBC, blood chemistry, etc.)</li>
+                            <li data-i18n="lab.blood.l2">Fasting and postprandial glucose sampling</li>
+                            <li data-i18n="lab.blood.l3">Blood cultures for infection diagnosis</li>
+                            <li data-i18n="lab.blood.l4">Hormone and vitamin level testing</li>
+                            <li data-i18n="lab.blood.l5">Specialized tests (genetic, allergy, etc.)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://i.ebayimg.com/images/g/dNAAAOSw1tdmVQFa/s-l1200.png"
+                        alt="Urine & Stool Collection">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="lab.urine.title">Urine & Stool Collection</h3>
+                        <p class="service-card-description" data-i18n="lab.urine.desc">
+                            Convenient and private collection of urine and stool samples for a variety of diagnostic
+                            purposes.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="lab.urine.l1">Urinalysis for kidney and urinary tract health</li>
+                            <li data-i18n="lab.urine.l2">24-hour urine collection</li>
+                            <li data-i18n="lab.urine.l3">Stool analysis for digestive disorders</li>
+                            <li data-i18n="lab.urine.l4">Occult blood and parasite testing</li>
+                            <li data-i18n="lab.urine.l5">Sample pickup from your home</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3952234/pexels-photo-3952234.jpeg?auto=compress&w=800&q=80"
+                        alt="Swab & PCR Sampling">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="lab.swab.title">Swab & PCR Sampling</h3>
+                        <p class="service-card-description" data-i18n="lab.swab.desc">
+                            Nasal, throat, and wound swabs, including PCR tests for infectious diseases, collected with
+                            care and precision.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="lab.swab.l1">COVID-19 PCR and rapid antigen tests</li>
+                            <li data-i18n="lab.swab.l2">Throat and nasal swabs for flu and strep</li>
+                            <li data-i18n="lab.swab.l3">Wound and skin swab cultures</li>
+                            <li data-i18n="lab.swab.l4">Sexually transmitted infection (STI) screening</li>
+                            <li data-i18n="lab.swab.l5">Sample transport to accredited labs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatments Section -->
+        <section class="treatments-section">
+            <div class="treatments-container">
+                <h2 class="section-title" data-i18n="lab.tests.title">Types of Lab Tests We Support</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="lab.tests.desc">
+                    Insta Clinic partners with accredited laboratories to provide a comprehensive menu of diagnostic
+                    tests.
+                </p>
+                <div class="treatments-grid">
+                    <div class="treatment-item">
+                        <span class="treatment-icon"><i class="fas fa-vial"></i></span>
+                        <h3 class="treatment-title" data-i18n="lab.tests.t1.title">Routine Blood Tests</h3>
+                        <p class="treatment-description" data-i18n="lab.tests.t1.desc">
+                            CBC, blood chemistry, lipid profile, liver and kidney function, and more.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon"><i class="fas fa-dna"></i></span>
+                        <h3 class="treatment-title" data-i18n="lab.tests.t2.title">Hormonal & Genetic Tests</h3>
+                        <p class="treatment-description" data-i18n="lab.tests.t2.desc">
+                            Thyroid, reproductive hormones, vitamin levels, and genetic screening.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon"><i class="fas fa-virus"></i></span>
+                        <h3 class="treatment-title" data-i18n="lab.tests.t3.title">Infection & PCR Tests</h3>
+                        <p class="treatment-description" data-i18n="lab.tests.t3.desc">
+                            COVID-19 PCR, hepatitis, HIV, and other infectious disease panels.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon"><i class="fas fa-microscope"></i></span>
+                        <h3 class="treatment-title" data-i18n="lab.tests.t4.title">Urine, Stool & Culture Tests</h3>
+                        <p class="treatment-description" data-i18n="lab.tests.t4.desc">
+                            Urinalysis, stool analysis, and bacterial cultures for accurate diagnosis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="approach-section">
+            <div class="approach-container">
+                <h2 class="section-title" data-i18n="lab.approach.title">Our Approach to Lab Sampling</h2>
+                <div class="approach-content">
+                    <div class="approach-image">
+                        <img src="https://images.pexels.com/photos/3735716/pexels-photo-3735716.jpeg?auto=compress&w=800&q=80"
+                            alt="Lab Sampling Approach">
+                    </div>
+                    <div class="approach-text">
+                        <h3 data-i18n="lab.approach.subtitle">Safe, Accurate, and Patient-Focused</h3>
+                        <p data-i18n="lab.approach.desc">
+                            Our lab sampling process is designed for your comfort, safety, and convenience. We use
+                            modern equipment and follow international standards for sample collection, labeling, and
+                            transport.
+                        </p>
+                        <ul class="approach-list">
+                            <li data-i18n="lab.approach.l1">Strict hygiene and infection control protocols</li>
+                            <li data-i18n="lab.approach.l2">Trained, certified phlebotomists and nurses</li>
+                            <li data-i18n="lab.approach.l3">Clear instructions and patient education</li>
+                            <li data-i18n="lab.approach.l4">Rapid, secure delivery of samples to partner labs</li>
+                            <li data-i18n="lab.approach.l5">Confidential and timely results reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Lab Sampling Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;">
+                    Our experienced phlebotomists and nurses are dedicated to providing a safe and comfortable sampling experience.
+                </p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&w=800&q=80" alt="Nurse Salma Hassan">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Nurse Salma Hassan</h3>
+                            <p class="team-member-role">Senior Phlebotomist</p>
+                            <p class="team-member-bio">Expert in adult and pediatric blood draws, ensuring gentle and efficient sampling.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/6749771/pexels-photo-6749771.jpeg?auto=compress&w=800&q=80" alt="Nurse Ahmed Fathy">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Nurse Ahmed Fathy</h3>
+                            <p class="team-member-role">Lab Sampling Specialist</p>
+                            <p class="team-member-bio">Experienced in all types of sample collection and patient education.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/5083010/pexels-photo-5083010.jpeg?auto=compress&w=800&q=80" alt="Nurse Mona Khalil">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Nurse Mona Khalil</h3>
+                            <p class="team-member-role">Home Visit Nurse</p>
+                            <p class="team-member-bio">Specializes in home-based care and infection control for vulnerable patients.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Book Your Lab Sampling Visit</h2>
+                <p class="cta-description">
+                    Get accurate results from the comfort of your home. Schedule your lab sampling appointment with Insta Clinic today!
+                </p>
+                <a href="#" class="cta-button">Book Now</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+    
+    <title>About Us - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+            box-sizing: border-box;
+        }
+
+        header {
+            font-family: "Montserrat", sans-serif;
+            align-items: center;
+            flex-wrap: nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin: 0;
+            padding: 12px 24px;
+            display: flex;
+            background-color: #00989D;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(6, 17, 118, .08), 0 4px 12px rgb(6, 17, 118, .08);
+        }
+
+        body {
+            min-width: unset;
+            overflow-x: hidden;
+        }
+
+        .container1 {
+            display: flex;
+        }
+
+        .container1 img {
+            width: 10%;
+            display: flex;
+        }
+
+        nav button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 20%;
+            color: #eee;
+            padding: 10px;
+            text-wrap: nowrap;
+        }
+
+        nav button:hover {
+            color: black;
+        }
+
+        nav {
+            padding: 20px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: end;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #00989D;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #00989D;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background-color: #00989D;
+            padding: 60px 20px;
+        }
+
+        .mission-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .mission-content h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #f8f8f8;
+        }
+
+        .mission-content p {
+            color: #f8f8f8;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #00989D;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-member {
+            width: calc(33.33% - 30px);
+            min-width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .member-image i {
+            font-size: 80px;
+            color: #00989D;
+        }
+
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            margin-bottom: 10px;
+            color: #00989D;
+        }
+
+        .member-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #00989D;
+            font-size: 18px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-content h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .stat-item {
+            width: 200px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-description {
+            font-size: 16px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #00989D;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .contact-card {
+            width: 300px;
+            padding: 30px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-card i {
+            font-size: 40px;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .contact-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            max-width: 150px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .social-footer {
+            margin-bottom: 20px;
+        }
+
+        .social-footer a {
+            color: white;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Mobile Styles */
+        @media only screen and (max-width: 768px) {
+            /* Mobile Menu */
+            .mobile-menu-toggle {
+                display: block;
+                font-size: 24px;
+                color: white;
+                cursor: pointer;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #00989D;
+                width: 100%;
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav button {
+                width: 100%;
+                text-align: center;
+                padding: 15px;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+            }
+
+            /* Hero Section */
+            .hero-section h1 {
+                font-size: 32px;
+            }
+
+            /* Layout adjustments */
+            .about-content, .team-members, .stats-grid, .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .team-member {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .about-image, .about-text {
+                flex: none;
+                width: 100%;
+            }
+
+            /* Typography */
+            .about-section h2, .mission-content h2, .team-section h2, 
+            .stats-content h2, .contact-section h2 {
+                font-size: 28px;
+            }
+
+            /* RTL fix for contact info flex wrapping */
+            .contact-info[dir="rtl"] {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 data-i18n="about.hero.title">About Insta Clinic</h1>
+        <p data-i18n="about.hero.subtitle">Providing quality healthcare services with compassion and excellence</p>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2 data-i18n="about.story.title">Our Story</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p data-i18n="about.story.p1">Insta Clinic was founded with a simple mission: to make quality healthcare accessible to everyone. 
+                   What started as a small clinic in 2018 has now grown into a network of specialized healthcare centers 
+                   across the region.</p>
+                <p data-i18n="about.story.p2">Our team of dedicated healthcare professionals works tirelessly to provide personalized care 
+                   to each patient who walks through our doors. We believe in treating not just the symptoms, 
+                   but the whole person.</p>
+                <p data-i18n="about.story.p3">At Insta Clinic, we combine advanced medical technology with a compassionate approach to healthcare, 
+                   ensuring that our patients receive the best possible care in a comfortable and welcoming environment.</p>
+            </div>
+            <div class="about-image">
+                <div id="clinic-animation" style="width: 100%; height: 300px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="mission-content">
+            <h2 data-i18n="about.mission.title">Our Mission & Values</h2>
+            <p data-i18n="about.mission.text">Our mission is to provide accessible, high-quality healthcare services that improve the health and wellbeing of the communities we serve. We are guided by our core values of compassion, excellence, integrity, and innovation.</p>
+            <div class="values-icons">
+                <div id="values-animation" style="width: 100%; height: 200px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <!-- <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="team-members">
+            <div class="team-member">
+                <div class="member-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Chief Medical Director</p>
+                    <p>Specializing in Emergency Medicine with over 15 years of experience.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Dr. Michael Chen</h3>
+                    <p>Neurologist</p>
+                    <p>Board-certified neurologist with expertise in treating complex neurological conditions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image">
+                    <i class="fas fa-user-nurse"></i>
+                </div>
+                <div class="member-info">
+                    <h3>Amanda Rodriguez</h3>
+                    <p>Head Nurse</p>
+                    <p>Dedicated to providing compassionate care and leading our nursing team.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Stats Section -->
+    <!-- <section class="stats-section">
+        <div class="stats-content">
+            <h2>Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-description">Specialized Clinics</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-description">Healthcare Professionals</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15,000+</div>
+                    <div class="stat-description">Patients Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-description">Patient Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 data-i18n="about.contact.title">Get In Touch</h2>
+        <div class="contact-info" >
+            <div class="contact-card" onClick="window.open('https://wa.me/+201033298820', '_blank')" style="cursor: pointer;">
+                <i class="fa-brands fa-whatsapp"></i>
+                <h3 data-i18n="about.contact.whatsapp">Whats App</h3>
+                <p><a href="https://wa.me/+201033298820" style="color: #00989D; text-decoration: none;">01033298820</a></p>
+                <!-- <p>123 Healthcare Avenue<br>Medical District<br>City, State 12345</p> -->
+            </div>
+            
+            <div class="contact-card" onClick="window.open('tel:+201033298820', '_blank')" style="cursor: pointer;">
+                <i class="fas fa-phone"></i>
+                <h3 data-i18n="about.contact.phone">Call Us</h3>
+                <p><a data-i18n="about.contact.phone.number" href="tel:+201033298820" style="color: #00989D; text-decoration: none;">Number: 01033298820</a></p>
+            </div>
+            
+            <div class="contact-card" onClick="window.open('mailto:info@instacliniceg.com', '_blank')" style="cursor: pointer;">
+                <i class="fas fa-envelope"></i>
+                <h3 data-i18n="about.contact.email">Email Us</h3>
+                <p><a href="mailto:info@instacliniceg.com" style="color: #00989D; text-decoration: none;">info@instacliniceg.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+          function loadContent() {
+            // Header Loading
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('.btn'); // make sure your buttons have this class
+
+                buttons.forEach(btn => {
+                    const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                    if (btnHref && path.endsWith(btnHref)) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                // Re-run translation for header
+                if (window.initI18n) {
+                    window.initI18n();
+                }
+            })
+                .catch(error => console.error('Error loading header:', error));
+                // Footer Loading
+                fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+                   // Clinic animation
+        lottie.loadAnimation({
+                container: document.getElementById('clinic-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets2.lottiefiles.com/private_files/lf30_4FGi6N.json' // Medical building animation
+                // path: 'https://assets2.lottiefiles.com/packages/lf20_tutvdkg0.json' // Replace with your animation path
+            });
+                 // Values animation
+             lottie.loadAnimation({
+                container: document.getElementById('values-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://assets10.lottiefiles.com/packages/lf20_5njp3vgg.json' // Doctor/healthcare animation
+                // path: 'https://assets3.lottiefiles.com/packages/lf20_q7hiluze.json' // Replace with your animation path
+            });
+            }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+
+       
+
+      
+    </script>
+    
+</body>
+
+</html>

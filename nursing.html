@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>Nursing Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+
+        /* Benefits Section */
+        .benefits-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .benefit-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .benefits-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="nursing.hero.title">Professional Nursing Services</h1>
+                <p class="hero-description" data-i18n="nursing.hero.desc">Compassionate and skilled nursing care in the comfort of your home. Our team
+                    of registered nurses provides personalized care tailored to your specific health needs.</p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="nursing.hero.cta">Request Nursing Service</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="nursing.services.title">Our Nursing Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="nursing.services.desc">
+                Insta Clinic offers comprehensive nursing services delivered by experienced and compassionate
+                professionals who are dedicated to providing the highest quality of care.
+            </p>
+
+            <div class="service-grid">
+
+                <div class="service-card">
+                    <img src="https://www.athulyahomecare.com/blog/wp-content/uploads/2023/09/The-Benefits-of-Home-Nursing-Services-1200x600-1.jpg"
+                        alt="Post-Surgical Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="nursing.elderly.title">Elderly care</h3>
+                        <p class="service-card-description" data-i18n="nursing.elderly.desc"> Compassionate support for seniors, including assistance
+                            with daily activities, medication management, mobility, and health monitoring—helping
+                            elderly patients maintain independence and quality of life at home.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="nursing.elderly.l1">Assistance with bathing, dressing, and hygiene</li>
+                            <li data-i18n="nursing.elderly.l2">Medication reminders and administration</li>
+                            <li data-i18n="nursing.elderly.l3">Mobility and fall prevention support</li>
+                            <li data-i18n="nursing.elderly.l4">Vital signs and health monitoring</li>
+                            <li data-i18n="nursing.elderly.l5">Companionship and emotional support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://kellerfamilymedical.com/wp-content/uploads/2017/05/Disease-Mgmt.jpg"
+                        alt="Chronic Disease Management">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="nursing.chronic.title">Chronic Disease Management</h3>
+                        <p class="service-card-description" data-i18n="nursing.chronic.desc">Ongoing nursing support for patients with chronic conditions
+                            such as diabetes, heart disease, and respiratory disorders.</p>
+                        <ul class="service-card-list">
+                            <li data-i18n="nursing.chronic.l1">Blood sugar and blood pressure monitoring</li>
+                            <li data-i18n="nursing.chronic.l2">Medication management</li>
+                            <li data-i18n="nursing.chronic.l3">Diet and lifestyle guidance</li>
+                            <li data-i18n="nursing.chronic.l4">Symptom tracking and reporting</li>
+                            <li data-i18n="nursing.chronic.l5">Coordination with physicians</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://www.stpaulsschoolofnursing.edu/blog/nursing/what-it-s-like-to-be-a-pediatric-nurse/_jcr_content/blog/image.transform/w1000/q85/img.jpeg"
+                        alt="Pediatric Nursing">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="nursing.pediatric.title">Pediatric Nursing</h3>
+                        <p class="service-card-description" data-i18n="nursing.pediatric.desc">
+                            Specialized nursing care for infants and children, including medication administration,
+                            monitoring, and support for families managing pediatric health conditions at home.
+                        </p>
+
+                        <ul class="service-card-list">
+                            <li data-i18n="nursing.pediatric.l1">Medication and injection administration</li>
+                            <li data-i18n="nursing.pediatric.l2">Growth and development monitoring</li>
+                            <li data-i18n="nursing.pediatric.l3">Support for chronic pediatric conditions</li>
+                            <li data-i18n="nursing.pediatric.l4">Parental education and guidance</li>
+                            <li data-i18n="nursing.pediatric.l5">Post-hospitalization care</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="benefits-container">
+                <h2 class="section-title" data-i18n="nursing.benefits.title">Benefits of Our Nursing Care</h2>
+                <p data-i18n="nursing.benefits.desc"
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our nursing services are designed to provide comprehensive care while promoting independence,
+                    comfort, and improved quality of life.
+                </p>
+
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-home benefit-icon"></i>
+                        <h3 class="benefit-title" data-i18n="nursing.benefits.comfort.title">Comfort of Home</h3>
+                        <p class="benefit-description" data-i18n="nursing.benefits.comfort.desc">Receive professional nursing care in the familiar and comfortable
+                            environment of your own home.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <i class="fas fa-user-md benefit-icon"></i>
+                        <h3 class="benefit-title" data-i18n="nursing.benefits.persona.title">Personalized Care</h3>
+                        <p class="benefit-description" data-i18n="nursing.benefits.persona.desc">Customized care plans tailored to your specific health needs and
+                            personal preferences.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <i class="fas fa-heart benefit-icon"></i>
+                        <h3 class="benefit-title" data-i18n="nursing.benefits.improved.title">Improved Recovery</h3>
+                        <p class="benefit-description" data-i18n="nursing.benefits.improved.desc">Studies show patients recover faster and have fewer complications
+                            when receiving care in their home environment.</p>
+                    </div>
+
+                    <div class="benefit-item">
+                        <i class="fas fa-clock benefit-icon"></i>
+                        <h3 class="benefit-title" data-i18n="nursing.benefits.avail.title">24/7 Availability</h3>
+                        <p class="benefit-description" data-i18n="nursing.benefits.avail.desc">Round-the-clock nursing services available to ensure continuous
+                            care and support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Nursing Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our team of registered nurses and nursing assistants brings years of experience and a compassionate approach to every patient interaction.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Emily Rodriguez">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Emily Rodriguez, RN</h3>
+                            <p class="team-member-role">Head of Nursing Services</p>
+                            <p class="team-member-bio">With over 12 years of experience in various nursing specialties, Emily leads our nursing team with expertise and compassion.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="David Thompson">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">David Thompson, RN</h3>
+                            <p class="team-member-role">Specialized Care Nurse</p>
+                            <p class="team-member-bio">David specializes in post-surgical care and wound management, bringing advanced skills to our home nursing services.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Sophia Kim">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Sophia Kim, LPN</h3>
+                            <p class="team-member-role">Chronic Care Specialist</p>
+                            <p class="team-member-bio">Sophia has dedicated her career to helping patients manage chronic conditions with dignity and improved quality of life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Need Professional Nursing Care?</h2>
+                <p class="cta-description">Our team of skilled nurses is ready to provide the care you or your loved one needs. Contact us today to discuss your nursing care requirements.</p>
+                <a href="#" class="cta-button">Schedule a Consultation</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Callback</title>
+</head>
+<body>
+    <h1>Callback Test</h1>
+    <div id="params"></div>
+    
+    <script>
+        // Display all URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramsDiv = document.getElementById('params');
+        
+        let html = '<h2>Received Parameters:</h2>';
+        for (const [key, value] of urlParams) {
+            html += `<p><strong>${key}:</strong> ${value}</p>`;
+        }
+        
+        paramsDiv.innerHTML = html;
+        
+        console.log('All URL parameters:', Object.fromEntries(urlParams));
+    </script>
+</body>
+</html> 

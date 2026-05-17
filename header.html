@@ -1,0 +1,291 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+        
+    }
+
+    header {
+        font-family: "Montserrat", sans-serif;
+        align-items: center;
+        flex-wrap: nowrap;
+        position: sticky;
+        margin: 0;
+        padding: 12px 24px;
+
+        display: flex;
+        background-color: #00989D;
+        justify-content: space-between;
+        box-shadow: 0 2px 4px rgba(6, 17, 118, .08), 0 4px 12px rgb(6, 17, 118, .08);
+        z-index: 1000;
+    }
+
+    .container1 {
+        display: flex;
+        /* justify-content: flex-start; */
+
+    }
+
+    .container1 img {
+        width: 150px;
+        display: flex;
+        cursor: pointer;
+    }
+
+    nav {
+        /* padding: 20px; */
+        /* width: 50px; */
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: end;
+        font-family: "Montserrat", sans-serif;
+
+    }
+
+
+    nav button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 20%;
+        color: #eee;
+        padding: 10px;
+        text-wrap: nowrap;
+        font-size: 16px;
+    }
+
+    nav button:hover {
+        color: black;
+        font-weight: bold;
+    }
+
+
+    .btn.active {
+        color: black;
+        font-weight: bold;
+    }
+
+    .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 8px;
+        border-left: 1px solid rgba(255,255,255,0.3);
+        padding-left: 8px;
+    }
+    .lang-switch button {
+        color: #eee;
+        opacity: 0.8;
+        font-weight: 600;
+    }
+    .lang-switch button.active {
+        opacity: 1;
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    #menu-toggle {
+        display: none;
+    }
+
+    /* Hamburger icon */
+    .menu-button-container {
+            display: none;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-button,
+        .menu-button::before,
+        .menu-button::after {
+            display: block;
+            background-color: white;
+            position: absolute;
+            height: 3px;
+            width: 30px;
+            border-radius: 3px;
+            transition: transform 0.25s ease;
+        }
+
+    .menu-button::before {
+        content: '';
+        margin-top: -8px;
+    }
+
+    .menu-button::after {
+        content: '';
+        margin-top: 8px;
+    }
+
+      /* Animation for hamburger to X */
+      #menu-toggle:checked ~ .menu-button-container .menu-button::before {
+            margin-top: 0;
+            transform: rotate(45deg);
+        }
+
+        #menu-toggle:checked ~ .menu-button-container .menu-button {
+            background: rgba(255, 255, 255, 0);
+        }
+
+        #menu-toggle:checked ~ .menu-button-container .menu-button::after {
+            margin-top: 0;
+            transform: rotate(-45deg);
+        }
+
+    /* Mobile menu styling */
+    .mobile-menu {
+            position: absolute;
+            top: 70px; /* Adjust based on your header height */
+            left: 0;
+            width: 100%;
+            padding: 0;
+            background-color: #00989D;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 0; /* Initial state for animation */
+            overflow-y: auto; /* Allow vertical scrolling */
+            transition: max-height 0.3s ease-out;
+            z-index: 999;
+        }
+
+        .mobile-menu button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: #eee;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: block;
+        }
+
+    .mobile-menu button:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu button:hover {
+        color: black;
+        font-weight: bold;
+    }
+
+    /* Toggle menu with checkbox */
+    #menu-toggle:checked~.mobile-menu {
+        max-height: 70vh; /* Set max height to 70% of viewport height */
+    }
+
+    .mobile-menu, .mobile-menu button {
+            background-image: none !important;
+        }
+
+    .mobile-lang-switch {
+        padding: 15px 10px;
+        text-align: center;
+    }
+
+    .mobile-lang-switch button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #eee;
+        padding: 0 10px;
+        font-size: 16px;
+        font-weight: 600;
+        opacity: 0.8;
+    }
+
+    .mobile-lang-switch button.active {
+        opacity: 1;
+        text-decoration: underline;
+    }
+    @media only screen and (max-width : 767px) {
+        nav button {
+            display: none;
+           
+        }
+
+        .container1 img {
+            width: 120px;
+        }
+
+        header {
+            padding: 12px 10px;
+
+        }
+
+        .menu-button-container {
+                display: flex;
+            }
+        .lang-switch {
+            display: none;
+        }
+
+    }
+</style>
+<header>
+    <div class="container1">
+
+        <img src="vertical white.png" alt="" onclick="location.href='index.html'">
+    </div>
+    <nav>
+        <button class="btn" onclick="location.href='index.html'" data-i18n="nav.home">
+            Home
+        </button>
+        <button class="btn" onclick="location.href='Aboutus.html'" data-i18n="nav.about">
+            About Us
+        </button>
+        <button id="privacy-btn" class="btn" onclick="location.href='policy.html'" data-i18n="nav.privacy">
+            Privacy policy
+        </button>
+        <button class="btn" onclick="location.href='Privacy.html'" data-i18n="nav.terms">
+            T&C
+        </button>
+        <button id="services-btn" onclick="window.location.href='index.html#clinics-section'" data-i18n="nav.services">
+        Our Services
+    </button>
+        <span class="lang-switch">
+            <button data-lang="en">EN</button>
+            <span style="color:#eee;opacity:.6">|</span>
+            <button data-lang="ar">AR</button>
+        </span>
+    </nav>
+
+    <input id="menu-toggle" type="checkbox">
+    <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+    </label>
+
+    <div class="mobile-menu">
+        <button onclick="location.href='index.html'" data-i18n="nav.home">
+            Home
+        </button>
+        <button onclick="location.href='Aboutus.html'" data-i18n="nav.about">
+            About Us
+        </button>
+        <button onclick="location.href='policy.html'" data-i18n="nav.privacy">
+             Privacy Policy
+        </button>
+        <button onclick="location.href='Privacy.html'" data-i18n="nav.terms">
+            T&C
+        </button>
+        <button id="services-btn" onclick="window.location.href='index.html#clinics-section'" data-i18n="nav.services">
+        Our Services
+    </button>
+        <div class="mobile-lang-switch">
+            <button data-lang="en">EN</button>
+            <span style="color:#eee;opacity:.6">___</span>
+            <button data-lang="ar">AR</button>
+        </div>
+    </div>
+</header>
+<script>
+
+</script>

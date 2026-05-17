@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>Dialysis Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #00989D;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            color: #1a5058;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content" >
+                <h1 class="hero-title" data-i18n="dialysis.hero.title">Dialysis Services</h1>
+                <p class="hero-description" data-i18n="dialysis.hero.desc">Professional and compassionate dialysis care in a comfortable environment.
+                    Our specialized team provides comprehensive kidney care services tailored to your needs.</p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="dialysis.hero.cta">Schedule Dialysis Consultation</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="dialysis.services.title">Our Dialysis Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="dialysis.services.desc">
+                Insta Clinic offers state-of-the-art dialysis services with a focus on patient comfort, safety, and
+                quality of life. Our specialized team provides personalized care for patients with kidney disease.
+            </p>
+
+            <div class="service-grid">
+
+
+                <div class="service-card">
+                    <img src="https://cdn.aarp.net/content/dam/aarp/health/conditions_treatments/2019/08/1140-home-dialysis-treatment.jpg"
+                        alt="Home Dialysis Support">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="dialysis.services.card.title">Home Dialysis Support</h3>
+                        <p class="service-card-description" data-i18n="dialysis.services.card.desc"> Receive safe, effective hemodialysis treatments in the
+                            comfort of your own home. Our expert nursing team provides setup, monitoring, and support,
+                            allowing you greater flexibility and independence while maintaining high standards of care
+                            and safety as we can transfer the dialysis unit for your house.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="dialysis.services.card.l1">Personalized dialysis plans at home</li>
+                            <li data-i18n="dialysis.services.card.l2">Professional setup and equipment management</li>
+                            <li data-i18n="dialysis.services.card.l3">Continuous monitoring during sessions</li>
+                            <li data-i18n="dialysis.services.card.l4">Education for patients and caregivers</li>
+                            <li data-i18n="dialysis.services.card.l5">24/7 support for emergencies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Professional Hemodialysis">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="dialysis.Professional.title">Professional Hemodialysis</h3>
+                        <p class="service-card-description" data-i18n="dialysis.Professional.desc"> Our professional hemodialysis service delivers
+                            high-quality, clinic-standard dialysis treatments in a safe and supportive environment. We
+                            use advanced equipment and strict protocols to ensure effective removal of toxins and
+                            fluids, with continuous monitoring by experienced healthcare professionals for your comfort
+                            and safety At Home to make sure you are safe and comfortable at the same time.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="dialysis.Professional.l1">Clinic-standard hemodialysis at home</li>
+                            <li data-i18n="dialysis.Professional.l2">Advanced dialysis machines and supplies</li>
+                            <li data-i18n="dialysis.Professional.l3">Strict infection control protocols</li>
+                            <li data-i18n="dialysis.Professional.l4">Vital signs and health monitoring</li>
+                            <li data-i18n="dialysis.Professional.l5">Experienced nephrology nurses and technicians</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://hometherapies.freseniusmedicalcare.com/content/dam/home-therapies/homepage/desktop/PD_Image@2x.jpg"
+                        alt="dialysis units">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="dialysis.installing.title">Professionalism in installing dialysis units</h3>
+                        <p class="service-card-description" data-i18n="dialysis.installing.desc"> Our team specializes in the professional installation of
+                            dialysis units, ensuring that all equipment is set up correctly and safely. We provide
+                            comprehensive training and support to patients and caregivers, enabling effective home
+                            dialysis management with confidence and ease.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="dialysis.installing.l1">Expert installation of dialysis equipment</li>
+                            <li data-i18n="dialysis.installing.l2">Safety checks and calibration</li>
+                            <li data-i18n="dialysis.installing.l3">Patient and caregiver training</li>
+                            <li data-i18n="dialysis.installing.l4">Ongoing technical support</li>
+                            <li data-i18n="dialysis.installing.l5">Regular maintenance and troubleshooting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <div class="process-container">
+                <h2 class="section-title" data-i18n="dialysis.process.title">The Dialysis Process</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="dialysis.process.desc">
+                    Understanding the dialysis process can help ease concerns. Here's what to expect when you receive
+                    dialysis treatment at Insta Clinic.
+                </p>
+
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title" data-i18n="dialysis.process.title1">Initial Assessment</h3>
+                        <p class="step-description" data-i18n="dialysis.process.desc1">Our nephrology team conducts a comprehensive evaluation of your
+                            kidney function and overall health to determine the most appropriate dialysis plan at your
+                            home.
+                        </p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title" data-i18n="dialysis.process.title2">Access Creation</h3>
+                        <p class="step-description" data-i18n="dialysis.process.desc2">A minor surgical procedure creates vascular access (fistula, graft,
+                            or catheter) to allow blood to flow in and out during hemodialysis treatment.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title" data-i18n="dialysis.process.title3">Treatment Sessions</h3>
+                        <p class="step-description" data-i18n="dialysis.process.desc3">Regular dialysis sessions (typically 3-4 hours, three times per week
+                            for hemodialysis) where blood is filtered through a dialyzer to remove waste and excess
+                            fluid.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title" data-i18n="dialysis.process.title4">Ongoing Monitoring</h3>
+                        <p class="step-description" data-i18n="dialysis.process.desc4">Continuous monitoring of your health, adjustment of treatment plans
+                            as needed, and regular check-ups with our nephrology team in your home.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Section: Patient Education & Resources -->
+<section class="faq-section">
+    <div class="faq-container">
+        <h2 class="section-title" data-i18n="dialysis.reco.title">Patient Education & Resources</h2>
+        <p data-i18n="dialysis.reco.desc" style="text-align: center; max-width: 800px; margin: 0 auto 40px auto; color: #666; line-height: 1.6;">
+            Empowering you with knowledge is a key part of our care. Explore answers to common questions and helpful resources about dialysis, kidney health, and living well with chronic kidney disease.
+        </p>
+
+        <div class="faq-item">
+            <div class="faq-question" data-i18n="dialysis.reco.card1.title">What is hemodialysis and how does it work?</div>
+            <div class="faq-answer" data-i18n="dialysis.reco.card1.desc">
+                Hemodialysis is a treatment that uses a machine to filter waste, salt, and extra water from your blood when your kidneys are no longer healthy enough to do this naturally. It helps maintain proper chemical balance and control blood pressure.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" data-i18n="dialysis.reco.card2.title">How should I prepare for my dialysis session?</div>
+            <div class="faq-answer" data-i18n="dialysis.reco.card2.desc">
+                Eat a light meal, take your prescribed medications, and wear comfortable clothing. Bring any necessary medical records and inform your care team of any new symptoms or concerns.
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <div class="faq-question" data-i18n="dialysis.reco.card3.title">What support is available for family and caregivers?</div>
+            <div class="faq-answer" data-i18n="dialysis.reco.card3.desc">
+                We offer training, educational materials, and 24/7 support to help family members and caregivers confidently assist with home dialysis and patient care.
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Dialysis Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our specialized team of nephrologists, dialysis nurses, and technicians are dedicated to providing exceptional care for patients with kidney disease.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Dr. James Wilson">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. James Wilson</h3>
+                            <p class="team-member-role">Chief Nephrologist</p>
+                            <p class="team-member-bio">With over 15 years of experience in nephrology, Dr. Wilson leads our dialysis program with expertise in kidney disease management and transplantation.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Nurse Lisa Chen">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Lisa Chen, RN</h3>
+                            <p class="team-member-role">Dialysis Nurse Manager</p>
+                            <p class="team-member-bio">Lisa specializes in dialysis care and patient education, ensuring each patient receives personalized attention and support throughout their treatment.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Robert Johnson">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Robert Johnson</h3>
+                            <p class="team-member-role">Dialysis Technician</p>
+                            <p class="team-member-bio">Robert is a certified dialysis technician with extensive experience in operating and maintaining dialysis equipment for optimal treatment outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Need Dialysis Services?</h2>
+                <p class="cta-description">Our team of kidney specialists is ready to provide the care you need. Contact us today to schedule a consultation or learn more about our dialysis services.</p>
+                <a href="#" class="cta-button">Schedule a Consultation</a>
+            </div>
+        </section>  -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        // Function to load the header and footer
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('.btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

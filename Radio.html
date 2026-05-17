@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>Radiology Services - Insta Clinic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        /* Approach Section */
+        .approach-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .approach-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .approach-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .approach-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .approach-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1a5058;
+        }
+
+        .approach-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .approach-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .approach-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list li:before {
+            left: auto;
+            right: 0;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .testimonial:before {
+            content: '\f10d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 2rem;
+            color: #00989D;
+            opacity: 0.2;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 40px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            color: #1a5058;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .approach-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="radiology.hero.title">Radiology & Diagnostic Imaging</h1>
+                <p class="hero-description" data-i18n="radiology.hero.desc">
+                    Advanced, accurate, and compassionate radiology services. Our expert radiologists and technologists
+                    at Insta Clinic use state-of-the-art imaging technology to provide precise diagnostics and support
+                    your healthcare journey.
+                </p>
+                <button class="hero-cta"  onclick="location.href='registration.html'" data-i18n="radiology.hero.cta">Book a Radiology Appointment</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="radiology.services.title">Our Radiology Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="radiology.services.desc">
+                Insta Clinic offers a comprehensive range of diagnostic imaging services, ensuring fast, reliable
+                results for patients and referring physicians. Our team combines clinical expertise with the latest
+                technology for your safety and comfort.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://imgs.search.brave.com/d9f7LyywDdH6egiL2DZ5yRyFldyPlTyZBKEPl3H9770/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vZVdzQjFh/WGxVMk5nek5yZFI4/SkNvdk1vdWdXUmRG/U3NkWFZEelI1U2E3/RS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTl0/WldScC9ZUzVuWlhS/MGVXbHRZV2RsL2N5/NWpiMjB2YVdRdk1q/QXcvTVRRd016TTBM/VEF3TVM5dy9hRzkw/Ynk5b2FYQXRZVzVr/L0xXSmhZMnN0ZUMx/eVlYbHovTFc5dUxX/eHBaMmgwWW05NC9M/bXB3Wno5elBUWXhN/bmcyL01USW1kejB3/Sm1zOU1qQW0vWXox/cllsaFJMV0ZSUnpa/bi9UM0pMY25CcGVE/bHhRbVYxL2JUSjRa/MmhGTjFjeVRXTlYv/VTE5T1J6SnljRWha/UFE"
+                        alt="Digital X-Ray">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="radiology.xray.title">Digital X-Ray</h3>
+                        <p class="service-card-description" data-i18n="radiology.xray.desc">
+                            High-resolution digital X-rays for bones, chest, and joints. Quick, low-dose imaging for
+                            accurate diagnosis of fractures, infections, and lung conditions in your houese to make sure
+                            you're healthy and safe at the same time.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="radiology.xray.l1">Bone and joint imaging</li>
+                            <li data-i18n="radiology.xray.l2">Chest X-rays for lung and heart evaluation</li>
+                            <li data-i18n="radiology.xray.l3">Detection of fractures and infections</li>
+                            <li data-i18n="radiology.xray.l4">Low radiation dose technology</li>
+                            <li data-i18n="radiology.xray.l5">Immediate digital results</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://imgs.search.brave.com/_8p-LIj2-nr5rAWC3Itfw9o-f3dFPktcK6VGefebnYg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vdFV2ZWxo/QV81QXNtU3ZyN3Bm/NFExcFZoRFlCcmlp/QkI3bWRlaTAwVG5x/RS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTl0/WldScC9ZUzVwYzNS/dlkydHdhRzkwL2J5/NWpiMjB2YVdRdk1U/SXovT0RJME1USTRM/M0JvYjNSdi9MMlJw/WVdkdWIzTjBhV056/L0xXOW1MWEJ5Wldk/dVlXNWovZVM1cWNH/Y19jejAyTVRKNC9O/akV5Sm5jOU1DWnJQ/VEl3L0ptTTlUVTB4/UlhWTFp6RlcvU1c5/SloyRkNOSE5VUVUx/RS9lRUZhUVhkek4w/NU1VRlZFL2RGaGZh/V0ZqWDFSWE9EMA"
+                        alt="Ultrasound">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="radiology.ultrasound.title">Ultrasound (Sonography)</h3>
+                        <p class="service-card-description" data-i18n="radiology.ultrasound.desc">
+                            Non-invasive imaging for abdominal, pelvic, thyroid, vascular, and pregnancy assessments.
+                            Safe for all ages, including prenatal and pediatric care in your home for your safety and
+                            comfort.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="radiology.ultrasound.l1">Abdominal and pelvic ultrasound</li>
+                            <li data-i18n="radiology.ultrasound.l2">Pregnancy and fetal assessment</li>
+                            <li data-i18n="radiology.ultrasound.l3">Thyroid and neck imaging</li>
+                            <li data-i18n="radiology.ultrasound.l4">Vascular Doppler studies</li>
+                            <li data-i18n="radiology.ultrasound.l5">Pediatric and adult applications</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <div class="service-card">
+                    <img src="https://imgs.search.brave.com/6HPJuMhdMd0v6ehpMWK881u286RXuY4wPPUqoDsrR5c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vMXJaY1h2/amlDTWhWV2hXZ2lp/dHZQMWRWUU9DaWlt/c2dDR1d5THJITzdW/US9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTl0/WldScC9ZUzVwYzNS/dlkydHdhRzkwL2J5/NWpiMjB2YVdRdk1U/SXcvTlRZd016QTFO/eTl3YUc5MC9ieTkw/YUdVdFoybHliQzF3/L1lYUnBaVzUwTFds/ekxXeDUvYVc1bkxX/bHVMWFJvWlMxMC9i/MjF2WjNKaGNHZ3RZ/VzVrL0xYZGhhWFJw/Ym1jdFptOXkvTFdF/dGMyTmhiaTEwYUhK/bC9aUzFrYjJOMGIz/SnpMV1p5L2IyMHRk/R2hsTFdWNFlXMHUv/YW5CblAzTTlOakV5/ZURZeC9NaVozUFRB/bWF6MHlNQ1pqL1BX/SnZXR0ZwTlc1WWFs/RjIvY2pBdFVsTmlU/MVp5YVVoRC9hMnAx/VTNBNExUVkRUVEY1/L1prSXRiSGhOWTNj/OQ"
+                        alt="CT Scan">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">CT Scan</h3>
+                        <p class="service-card-description">
+                            Advanced cross-sectional imaging for detailed evaluation of internal organs, trauma, tumors,
+                            and vascular diseases. Fast, precise, and comfortable in your home for your safety and
+                            comfort.
+                        </p>
+                        <ul class="service-card-list">
+                            <li>Head and brain CT</li>
+                            <li>Chest, abdomen, and pelvis scans</li>
+                            <li>Trauma and emergency imaging</li>
+                            <li>Tumor and cancer assessment</li>
+                            <li>Vascular and angiography studies</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="approach-section">
+            <div class="approach-container">
+                <h2 class="section-title" data-i18n="radiology.approach.title">Our Approach to Diagnostic Imaging</h2>
+                <div class="approach-content">
+                    <div class="approach-image">
+                        <img src="https://imgs.search.brave.com/gkg4ZCh4mSE_g-jUSkMEGEv6bEPKwYFnKKtqATqhH8E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vR1ZPVURF/S2J5R2E4cV9XSkhu/RHVwT3BvNmNSRzFa/dmExazVOQ3RkY21k/ay9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTkw/TkM1bS9kR05rYmk1/dVpYUXZhbkJuL0x6/QTVMek01THpZNUx6/UTEvTHpNMk1GOUdY/emt6T1RZNS9ORFUy/TWw5U2FqYzBNbTVW/L1VFaGFWVXBOV214/WmQzZHkvYVV0RFUw/bE1jMFpuT0Rrdy9T/QzVxY0dj"
+                            alt="Modern Diagnostic Imaging Approach">
+                    </div>
+                    <div class="approach-text">
+                        <h3 data-i18n="radiology.approach.subtitle">Patient-Centered, Accurate, and Safe</h3>
+                        <p data-i18n="radiology.approach.desc">
+                            We prioritize your comfort and safety at every step. Our radiologists work closely with your
+                            healthcare team to ensure you receive the most appropriate imaging and clear, timely
+                            results.
+                        </p>
+                        <ul class="approach-list">
+                            <li data-i18n="radiology.approach.l1">Making sure you are safe and comfortable in your home environment</li>
+                            <li data-i18n="radiology.approach.l2">Board-certified radiologists and experienced technologists</li>
+                            <li data-i18n="radiology.approach.l3">Low-dose protocols and non-invasive techniques</li>
+                            <li data-i18n="radiology.approach.l4">Fast turnaround for reports and images</li>
+                            <li data-i18n="radiology.approach.l5">Clear communication with patients and referring doctors</li>
+                            <li data-i18n="radiology.approach.l6">Strict quality and safety standards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Radiology Team</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;">
+                    Our board-certified radiologists and skilled technologists are dedicated to providing accurate
+                    diagnostics and compassionate care.
+                </p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&w=800&q=80"
+                            alt="Dr. Lina Morgan">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Lina Morgan</h3>
+                            <p class="team-member-role">Chief Radiologist</p>
+                            <p class="team-member-bio">Dr. Morgan specializes in cross-sectional imaging and leads our
+                                radiology department with a focus on quality and patient safety.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/708848/pexels-photo-708848.jpeg?auto=compress&w=800&q=80"
+                            alt="Dr. Omar Khaled">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Omar Khaled</h3>
+                            <p class="team-member-role">Diagnostic Radiologist</p>
+                            <p class="team-member-bio">Dr. Khaled is experienced in musculoskeletal and emergency
+                                imaging, ensuring rapid and accurate results for urgent cases.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/708901/pexels-photo-708901.jpeg?auto=compress&w=800&q=80"
+                            alt="Sarah Lee, RT">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Sarah Lee, RT</h3>
+                            <p class="team-member-role">Senior Radiologic Technologist</p>
+                            <p class="team-member-bio">Sarah ensures patient comfort and safety during all imaging
+                                procedures and is dedicated to delivering high-quality diagnostic images.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Book Your Imaging Appointment</h2>
+                <p class="cta-description">Experience advanced, patient-focused radiology at Insta Clinic. Schedule your
+                    imaging study today for fast, accurate results.</p>
+                <a href="#" class="cta-button">Book Now</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

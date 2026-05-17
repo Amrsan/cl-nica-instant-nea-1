@@ -1,0 +1,1322 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+
+    <title>InstaClinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+            /* outline: 1px solid red; */
+        }
+
+        header {
+            font-family: "Montserrat", sans-serif;
+            align-items: center;
+            flex-wrap: nowrap;
+            position: sticky;
+            margin: 0;
+            padding: 12px 24px;
+            display: flex;
+            background-color: #00989D;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(6, 17, 118, .08), 0 4px 12px rgb(6, 17, 118, .08);
+        }
+
+        body {
+            min-width: unset;
+        }
+
+        .clinics {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: #eee;
+        }
+
+        @media only screen and (min-width : 1080px) {
+            .clinics {
+                width: 100%;
+                display: block;
+                margin: auto;
+
+            }
+
+            .clinics h1 {
+                justify-self: center;
+                text-align: center;
+                text-decoration: underline;
+                text-underline-offset: 10px;
+
+
+            }
+
+            .container .card {
+                display: unset;
+                display: flex;
+                justify-content: space-between;
+                margin: 10px;
+
+            }
+        }
+
+
+
+        .container1 {
+            display: flex;
+            /* justify-content: flex-start; */
+
+        }
+
+        .container1 img {
+            width: 10%;
+            display: flex;
+
+
+        }
+
+        nav button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 20%;
+            color: #eee;
+            padding: 10px;
+            text-wrap: nowrap;
+        }
+
+        nav button:hover {
+            color: black;
+        }
+
+        nav {
+            padding: 20px;
+            /* width: 50px; */
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: end;
+            font-family: "Montserrat", sans-serif;
+
+        }
+
+        .section1 {
+            position: relative;
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            display: flex;
+            min-height: 60vh;
+            height: 100vh;
+            background: #eee;
+            overflow: hidden;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s;
+            left: 0;
+            top: 0;
+        }
+
+        .bg-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bg-slider,
+        .bg-slider-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .main-logo-content {
+            position: relative;
+            z-index: 4;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .section2 {
+            display: flex;
+            padding: 20px;
+            justify-content: space-around;
+            align-items: center;
+            background-position: center;
+            align-items: center;
+            display: flex;
+            padding-top: 80px;
+            height: auto;
+            background-size: fixed;
+            /* background-color: #eee; */
+            flex-wrap: wrap;
+            background-color: #eee;
+            /* background-image: url("SVGs/wave\ BG.svg"); */
+            background-attachment: cover;
+
+            /* background-image: url("BG\ pattern-10.jpg"); */
+
+
+
+
+
+        }
+
+        .section3 {
+            background-attachment: fixed;
+            background-position: center;
+            align-items: center;
+            display: flex;
+            padding-top: 80px;
+            height: 480px;
+            background-size: cover;
+            background-color: #eee;
+        }
+
+
+        .p1 {
+            /* width: 70%; */
+            text-wrap: wrap;
+            font-size: 30px;
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            padding: 10px;
+            margin-bottom: 40px;
+
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            top: 80px;
+        }
+
+        .launch-button {
+            border: none;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            backdrop-filter: blur(8px) saturate(180%);
+            -webkit-backdrop-filter: blur(8px) saturate(180%);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            transition:
+                background 0.3s,
+                color 0.3s,
+                box-shadow 0.3s,
+                border 0.3s,
+                transform 0.2s;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .launch-button::before {
+            content: "";
+            position: absolute;
+            left: -75%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
+            transform: skewX(-25deg);
+            transition: left 0.5s;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .launch-button:hover {
+            background: rgba(0, 152, 157, 0.25);
+            color: #00989D;
+            border: 1.5px solid #00989D;
+            box-shadow: 0 8px 32px 0 rgba(0, 152, 157, 0.18);
+            transform: scale(1.06);
+        }
+
+        .launch-button:hover::before {
+            left: 120%;
+        }
+
+        /* .b1 {
+            justify-content: space-between;
+            align-items: center;
+            display: inline-flex;
+            position: relative;
+            left: 300%;
+            cursor: pointer;
+            width: 140px;
+            height: 50px;
+            border-width: 1px;
+            color: #fff;
+            border-color: #00979D;
+            font-weight: 700;
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            background: #00979D;
+            padding: 10px 20px;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .b1 i {
+            color: black;
+            right: 0;
+            padding: 17px 7px;
+            border-radius: 100%;
+            background-color: white;
+            opacity: 0.5;
+            position: absolute;
+            right: 0;
+            transition: width 0.3s ease;
+            width: 40px;
+            z-index: 1;
+        }
+
+        .b1:hover i {
+            border-top-left-radius: 28px;
+            border-top-right-radius: 28px;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            width: 100%;
+            width: 125px;
+
+        }
+
+        .b1:hover {
+            color: transparent;
+            background: #006868;
+        } */
+
+
+
+        /* From Uiverse.io by alexruix */
+        .card {
+            width: 190px;
+            height: 254px;
+            border-radius: 20px;
+            background: #f5f5f5;
+            /* background: #00979D; */
+
+            position: relative;
+            padding: 1.8rem;
+            border: 4px solid #c3c6ce;
+            transition: 0.5s ease-out;
+            overflow: visible;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card-details {
+            color: black;
+            height: 100%;
+            gap: .5em;
+            display: grid;
+            place-content: center;
+        }
+
+        .card-button {
+            transform: translate(-50%, 125%);
+            width: 60%;
+            border-radius: 1rem;
+            border: none;
+            background-color: #006868;
+            color: #fff;
+            font-size: 1rem;
+            padding: .5rem 1rem;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            opacity: 0;
+            transition: 0.3s ease-out;
+            cursor: pointer;
+        }
+
+        .text-body {
+            color: rgb(134, 134, 134);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /*Text*/
+        .text-title {
+            justify-self: center;
+            cursor: pointer;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /*Hover*/
+        .card:hover {
+            cursor: pointer;
+            border-color: #006868;
+            /* box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25); */
+            box-shadow: 0 0 10px
+        }
+
+        .card-details i {
+            justify-self: center;
+            /* width: 20px; */
+            font-size: 100px;
+        }
+
+
+
+        /* .card:not(:hover) {
+            opacity: 0.6;
+        } */
+
+        .card-details svg {
+            justify-self: center;
+        }
+
+        .card:hover .card-button {
+            transform: translate(-50%, 50%);
+            opacity: 1;
+        }
+
+        .card:hover .section2 {
+            background-color: #c3c6ce;
+        }
+
+        /* .section2:hover .card {
+            filter: brightness(0.5);
+        } */
+
+        .section2 .card:hover {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        footer img {
+            width: 100%;
+
+        }
+
+
+        div.container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        div.container .card {
+            transition: all 0.3s ease;
+        }
+
+        /* div.container:hover> :not(:hover) {
+            opacity: 0.5;
+            filter: blur(10px);
+            transform: scale(0.8);
+            cursor: pointer;
+        } */
+
+        div.container:has(.card:hover) .card:not(:hover) {
+            opacity: 0.5;
+            filter: blur(10px);
+            transform: scale(0.8);
+        }
+
+        /* Tablet Styles */
+        @media (max-width: 1200px) {
+            .section1 {
+                height: 600px; /* Set a fixed height for tablet */
+                min-height: 50vh;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 800px) {
+            .section1 {
+                height: 600px; /* Set a fixed height for mobile */
+                min-height: 50vh;
+            }
+
+            .main-logo-content .p1 {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+
+            .launch-button {
+                padding: 12px 30px;
+                font-size: 18px;
+            }
+        }
+
+        p {
+            font-family: "Montserrat", sans-serif;
+
+        }
+
+
+        .title1 {
+            align-self: center;
+            display: flex;
+            font-family: "Montserrat", sans-serif;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .main-logo {
+            display: flex;
+            width: 70%;
+            height: 70%;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .section2 h1 {
+            display: flex;
+            color: white;
+        }
+
+        .underline {
+            display: flex;
+            flex-direction: column;
+            align-self: start;
+            width: 60px;
+            height: 2px;
+            /* background-color: white; */
+            margin: 10px auto;
+        }
+
+
+        .object1 {
+            width: 80%;
+        }
+
+        @media only screen and (max-width: 767px) {
+
+            .section2 div {
+                justify-content: center;
+            }
+
+            .clinics {
+                width: 100%;
+                display: block;
+                margin: auto;
+
+            }
+
+            .clinics h1 {
+                justify-self: center;
+                text-decoration: underline;
+                text-align: center;
+                text-underline-offset: 10px;
+            }
+
+            .main-logo {
+                width: 120%;
+            }
+
+            .container:hover> :not(:hover),
+            .section2 .card:hover,
+            .card:hover {
+                opacity: 1 !important;
+                filter: none !important;
+                /* transform: none !important; */
+                box-shadow: none !important;
+            }
+
+        }
+
+        /* Tablet styles here */
+        @media (min-width: 601px) and (max-width: 900px) {
+
+            .container:hover> :not(:hover),
+            .section2 .card:hover,
+            .card:hover {
+                opacity: 1 !important;
+                filter: none !important;
+                /* transform: none !important; */
+                box-shadow: none !important;
+            }
+        }
+
+        @media only screen and (min-width: 900px) {
+            .clinics {
+                width: 100%;
+                display: block;
+                margin: auto;
+
+            }
+
+            .card {
+                margin: 10px;
+            }
+
+            .clinics h1 {
+                justify-self: center;
+                text-decoration: underline;
+                text-underline-offset: 10px;
+                text-align: center;
+
+
+            }
+
+
+        }
+
+        @media only screen and (min-width: 500px) {
+            .section2 div {
+                justify-content: center;
+            }
+
+            .clinics {
+                width: 100%;
+                display: block;
+                margin: auto;
+
+            }
+
+            .card {
+                margin: 10px;
+            }
+
+            .clinics h1 {
+                justify-self: center;
+                text-decoration: underline;
+                text-underline-offset: 10px;
+                text-align: center;
+
+            }
+
+            .main-logo {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            .main-logo {
+                width: 100%;
+            }
+        }
+
+        /* Responsive App Download Area */
+        .app-download-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 60px 0 40px 0;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .app-download-content {
+            background: linear-gradient(120deg, #1a5058 80%, #00989D 100%);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(26, 80, 88, 0.10);
+            padding: 40px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .app-download-text {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .app-download-text h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 12px;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .app-download-text p {
+            color: #e0f7fa;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .app-store-buttons {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .app-store-buttons img {
+            height: 48px;
+            width: auto;
+            max-width: 160px;
+        }
+
+        .app-download-image {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-download-image img {
+            max-width: 150px;
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            background: #fff;
+        }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+            .app-download-content {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+                padding: 32px 16px;
+            }
+
+            .app-download-image {
+                justify-content: center;
+                margin-top: 12px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .app-download-content {
+                padding: 24px 8px;
+                border-radius: 18px;
+                gap: 20px;
+            }
+
+            .app-download-text h2 {
+                font-size: 1.3rem;
+            }
+
+            .app-download-text p {
+                font-size: 1rem;
+            }
+
+            .app-download-image img {
+                max-width: 100px;
+                border-radius: 12px;
+            }
+
+            .app-store-buttons img {
+                height: 38px;
+                max-width: 120px;
+            }
+
+        }
+
+        /* Add to your CSS */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 32px;
+            left: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            z-index: 9999;
+        }
+
+        .contact-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: #25d366;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .contact-btn.phone-btn {
+            background: #25d366;
+        }
+
+        .contact-btn.whatsapp-btn {
+            background: linear-gradient(135deg, #25d366 60%, #43e97b 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .coming-soon-msg {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: -35px;
+            transform: translateX(-50%);
+            background: #222;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .app-store-btn-wrapper:hover .coming-soon-msg {
+            display: block;
+        }
+
+        /* Background slider styles */
+        .main-logo-bg-slider {
+            position: relative;
+            width: 100%;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+        }
+
+        .bg-slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s;
+            left: 0;
+            top: 0;
+        }
+
+        .bg-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .bg-slider-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(26, 80, 88, 0.45) 60%, rgba(0, 152, 157, 0.35) 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .main-logo-content {
+            position: relative;
+            z-index: 4;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bg-slider-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            gap: 8px;
+        }
+
+        .bg-slider-dot.active {
+            background: #00989D;
+            opacity: 1;
+        }
+
+        .bg-slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            left: 110%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            color: #222;
+            padding: 6px 18px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .contact-btn:hover .contact-tooltip,
+        .contact-btn:focus .contact-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .section-divider-wave {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            position: relative;
+            z-index: 7;
+            margin-bottom: -4px;
+            /* Fix for thin white line */
+
+        }
+
+        .section-divider-wave svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<template id="header-template">
+    <header>
+        <div class="container1">
+
+            <img src="vertical white.png" alt="">
+        </div>
+        <nav>
+            <button>
+                Home
+            </button>
+            <button onclick="location.href='Aboutus.html'">
+                About Us
+            </button>
+            <button>
+                Contact Us
+            </button>
+            <button>
+                Privacy & Terms
+            </button>
+        </nav>
+
+    </header>
+</template>
+<div id="header"></div>
+<!-- /////////////////////////////////////////////////////////////////////////////// -->
+
+<body>
+    <main>
+        <section class="section1">
+            <div class="bg-slider">
+                <picture class="bg-slide active">
+                    <!-- Mobile Image (for screens up to 800px wide) -->
+                    <source media="(max-width: 800px)" srcset="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/800-600-2.png">
+                    <!-- Tablet Image (for screens up to 1200px wide) -->
+                    <source media="(max-width: 1200px)" srcset="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/1200-600--09.png">
+                    <!-- Desktop Image (default) -->
+                    <img src="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/WhatsApp%20Image%202025-10-08%20at%2014.58.08_5c3ed388.jpg" alt="Slide 1">
+                </picture>
+                <picture class="bg-slide">
+                    <!-- Mobile Image -->
+                    <source media="(max-width: 800px)" srcset="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/800-600.png">
+                    <!-- Tablet Image -->
+                    <source media="(max-width: 1200px)" srcset="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/1200-600.png">
+                    <!-- Desktop Image -->
+                    <img src="https://djfbbxcvkwxwpkqqyjkr.supabase.co/storage/v1/object/public/service-images/Site%20banners/WhatsApp%20Image%202025-10-08%20at%2014.58.08_7b1e0ac1.jpg" alt="Slide 2">
+                </picture>
+            </div>
+            <div class="bg-slider-overlay"></div>
+            <div class="main-logo-content">
+                <p class="p1" data-i18n="hero.tagline">InstaClinic. Luxury care by the sea 🏖️</p>
+                <button id="explore-btn" class="launch-button" onclick="location.href='registration.html'" data-i18n="hero.cta">Book Now
+                </button>
+                <div class="bg-slider-dots"></div>
+            </div>
+        </section>
+
+        <div class="section-divider-wave">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M0,40 Q360,120 720,60 T1440,80 V120 H0 Z" fill="#eee" opacity="0.95" />
+            </svg>
+        </div>
+
+        <div id="clinics-section" class="clinics">
+            <h1 data-i18n="clinics.title">Our Clinics</h1>
+
+        </div>
+        <section class="section2">
+
+
+            <div class="container">
+                <div class="card" onclick="location.href='emergency.html'">
+                    <div class="card-details">
+                        <img src="SVGs/emergancy.svg" alt="Emergency"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+
+                        <!-- <i class="fa-solid fa-hospital" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.emergency.title">Emergency</p>
+                        <p class="text-body" data-i18n="card.emergency.body">24/7 emergency medical services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='nursing.html'">
+                    <div class="card-details">
+                        <img src="SVGs/home nursing.svg" alt="Nursing"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-user-nurse" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.nursing.title">Home Nursing</p>
+                        <p class="text-body" data-i18n="card.nursing.body">Professional nursing care services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='dialysis.html'">
+                    <div class="card-details">
+                        <img src="SVGs/dialysis.svg" alt="Dialysis"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-hand-holding-medical" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.dialysis.title">Dialysis</p>
+                        <p class="text-body" data-i18n="card.dialysis.body">Comprehensive dialysis services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='Radio.html'">
+                    <div class="card-details">
+                        <img src="SVGs/radio.svg" alt="Radiology"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-radiation" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.radiology.title">Radiology</p>
+                        <p class="text-body" data-i18n="card.radiology.body">Diagnostic imaging services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='dental.html'">
+                    <div class="card-details">
+                        <img src="SVGs/dental.svg" alt="Dental"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-tooth" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.dental.title">Dental</p>
+                        <p class="text-body" data-i18n="card.dental.body">Complete dental care services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='Orthopedic.html'">
+                    <div class="card-details">
+                        <img src="SVGs/ortho.svg" alt="Orthopedic"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-bone" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.ortho.title">Orthopedic</p>
+                        <p class="text-body" data-i18n="card.ortho.body">Complete Orthopedic care services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='Lab.html'">
+                    <div class="card-details">
+                        <img src="SVGs/lab.svg" alt="Lab Sampling"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-microscope" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.lab.title">Lab Sampling</p>
+                        <p class="text-body" data-i18n="card.lab.body">Complete lab sample collection services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='physio.html'">
+                    <div class="card-details">
+                        <!-- <i class="fa-solid fa-tooth" style="color: #1a5058;"></i> -->
+                        <img src="SVGs/physiotherapy.svg" alt="Physiotherapy"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+
+                        <p class="text-title" data-i18n="card.physio.title">Physiotherapy</p>
+                        <p class="text-body" data-i18n="card.physio.body">Complete Physiotherapy services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='pediatric.html'">
+                    <div class="card-details">
+                        <img src="SVGs/pediatric.svg" alt="Pediatric"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-child" " style=" color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.pediatric.title">Pediatric</p>
+                        <p class="text-body" data-i18n="card.pediatric.body">Pediatric care services</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='general-medicine.html'">
+                    <div class="card-details">
+                        <img src="SVGs/medicine.svg" alt="General Medicine"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-medkit" style="color: #1a5058;"></i> -->
+                        <p class="text-title" style="text-align: center;" data-i18n="card.genmedicine.title">General medicine</p>
+                        <p class="text-body" data-i18n="card.genmedicine.body">Providing comprehensive medical care</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+                <div class="card" onclick="location.href='general-surgery.html'">
+                    <div class="card-details">
+                        <img src="SVGs/surgery.svg" alt="General Surgery"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-syringe" style="color: #1a5058;"></i> -->
+                        <p class="text-title" style="text-align: center;" data-i18n="card.gensurgery.title">General surgery</p>
+                        <p class="text-body" data-i18n="card.gensurgery.body">Providing comprehensive surgical care</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+
+                <div class="card" onclick="location.href='dermatology.html'">
+                    <div class="card-details">
+                        <img src="SVGs/derma.svg" alt="Dermatology"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+
+                        <p class="text-title" data-i18n="card.derma.title">Dermatology</p>
+                        <p class="text-body" data-i18n="card.derma.body">Expert skin care services</p>
+                    </div>
+
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+                <div class="card" onclick="location.href='animal.html'">
+                    <div class="card-details">
+                        <img src="SVGs/animal care.svg" alt="Animal care"
+                            style="width:150px;height:150px;display:block;margin:0 auto 10px auto;">
+                        <!-- <i class="fa-solid fa-dog" style="color: #1a5058;"></i> -->
+                        <p class="text-title" data-i18n="card.animal.title">Animal care</p>
+                        <p class="text-body" data-i18n="card.animal.body">Veterinary services for pets</p>
+                    </div>
+                    <!-- <button class="card-button">More info</button> -->
+                </div>
+
+            </div>
+            <!-- App Download Area -->
+            <div class="app-download-area" id="app-download-area">
+                <div class="app-download-content">
+                    <div class="app-download-text">
+                        <h2 data-i18n="app.title">Get the Insta Clinic App</h2>
+                        <p data-i18n="app.body">
+                            Book appointments, manage your health, and access all our services from your phone.<br>
+                            Download now for a seamless healthcare experience!
+                        </p>
+                        <div class="app-store-buttons">
+                            <a href="https://apps.apple.com/eg/app/instaclinic/id6748585331" target="_blank">
+                                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                                    alt="Download on the App Store">
+                            </a>
+                            <!--<div class="app-store-btn-wrapper">-->
+                            <!--    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"-->
+                            <!--        alt="Download on the App Store" class="app-store-btn"-->
+                            <!--        style="cursor: not-allowed; opacity: 0.7;">-->
+                            <!--    <span class="coming-soon-msg">Coming soon</span>-->
+                            <!--</div>-->
+                            <a href="https://play.google.com/store/apps/details?id=com.freshhealth.instaclinic"
+                                target="_blank">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                                    alt="Get it on Google Play">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="app-download-image">
+                        <img src="vertical color.png" alt="App Preview">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- <section class="section3">
+
+            <div class="object1">
+
+                <script>
+                    lottie.loadAnimation({
+                        container: document.querySelector('.object1'), // the dom element
+                        renderer: 'svg',
+                        loop: true,
+                        autoplay: true,
+                        path: 'Animation - 1732900583891.json' // the path to your JSON animation
+                    });
+                </script>
+            </div>
+
+        </section> -->
+    </main>
+
+
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        // Function to load the header and footer
+        window.onload = function loadHeader() {
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('.btn'); // make sure your buttons have this class
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Add smooth scrolling functionality for the Explore button
+            // document.getElementById('explore-btn').addEventListener('click', function () {
+            //     const clinicsSection = document.getElementById('clinics-section');
+            //     if (clinicsSection) {
+            //         clinicsSection.scrollIntoView({ behavior: 'smooth' });
+            //     }
+            // });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.bg-slide');
+            const dotsContainer = document.querySelector('.bg-slider-dots');
+            let current = 0;
+            let interval;
+
+            // Clear existing dots (in case of reload)
+            dotsContainer.innerHTML = '';
+
+            // Create dots
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('span');
+                dot.className = 'bg-slider-dot' + (idx === 0 ? ' active' : '');
+                dot.addEventListener('click', () => showSlide(idx));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.bg-slider-dot');
+
+            function showSlide(idx) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = idx;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+
+            function nextSlide() {
+                let next = (current + 1) % slides.length;
+                showSlide(next);
+            }
+
+            interval = setInterval(nextSlide, 5000);
+
+            // Pause on hover
+            document.querySelector('.section1').addEventListener('mouseenter', () => clearInterval(interval));
+            document.querySelector('.section1').addEventListener('mouseleave', () => {
+                interval = setInterval(nextSlide, 3000);
+            });
+        });
+
+        // Add smooth scroll for "Our Services" button
+        setTimeout(function () {
+            const servicesBtn = document.getElementById('services-btn');
+            if (servicesBtn) {
+                servicesBtn.addEventListener('click', function () {
+                    const clinicsSection = document.getElementById('clinics-section');
+                    if (clinicsSection) {
+                        clinicsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        }, 100); // Wait for header to be loaded
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.location.hash === '#clinics-section') {
+                const section = document.getElementById('clinics-section');
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

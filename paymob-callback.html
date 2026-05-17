@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Payment - Insta Clinic</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a5058, #00989D);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .processing-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .processing-text {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .processing-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .error-message {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ffcccb;
+        }
+    </style>
+</head>
+<body>
+    <div class="processing-container">
+        <div class="spinner"></div>
+        <div class="processing-text">Processing Payment Result...</div>
+        <div class="processing-subtitle">Please wait while we verify your payment</div>
+        <div id="error-container"></div>
+    </div>
+
+    <script>
+        // Initialize Supabase
+        const supabaseClient = window.supabase.createClient(
+            window.SUPABASE_CONFIG.url, 
+            window.SUPABASE_CONFIG.anonKey
+        );
+
+        // Process payment callback
+        async function processPaymentCallback() {
+            try {
+                // Debug: Log the current URL and all parameters
+                console.log('Current URL:', window.location.href);
+                console.log('All URL parameters:', window.location.search);
+                
+                // Get URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                
+                // Log all parameters for debugging
+                for (let [key, value] of urlParams.entries()) {
+                    console.log(`URL Parameter: ${key} = ${value}`);
+                }
+                
+                // PayMob sends these parameters
+                const success = urlParams.get('success');
+                const transactionId = urlParams.get('id');
+                const orderId = urlParams.get('order');
+                const merchantOrderId = urlParams.get('merchant_order_id');
+                const amount = urlParams.get('amount_cents');
+                const currency = urlParams.get('currency');
+                const paymentMethod = urlParams.get('source_data_type');
+                const txnResponseCode = urlParams.get('txn_response_code');
+                const pending = urlParams.get('pending');
+                
+                console.log('PayMob callback received:', {
+                    success,
+                    transactionId,
+                    orderId,
+                    merchantOrderId,
+                    amount,
+                    currency,
+                    paymentMethod,
+                    txnResponseCode,
+                    pending
+                });
+
+                // Get booking data from session storage
+                const currentBookingStr = sessionStorage.getItem('currentBooking');
+                if (!currentBookingStr) {
+                    console.error('No booking data found in session storage');
+                    throw new Error('Booking data not found. Please try booking again.');
+                }
+                
+                const currentBooking = JSON.parse(currentBookingStr);
+                console.log('Current booking data:', currentBooking);
+
+                // Determine payment status
+                let paymentStatus;
+                let redirectUrl;
+                
+                if (success === 'true') {
+                    paymentStatus = 'paid';
+                    redirectUrl = window.PAYMOB_CALLBACK_URLS?.successPageUrl || '/success.html';
+                } else if (pending === 'true') {
+                    paymentStatus = 'pending';
+                    redirectUrl = window.PAYMOB_CALLBACK_URLS?.successPageUrl || '/success.html'; // Still show success for pending payments
+                } else {
+                    paymentStatus = 'failed';
+                    redirectUrl = window.PAYMOB_CALLBACK_URLS?.failurePageUrl || '/failure.html';
+                }
+                
+                console.log('Determined payment status:', paymentStatus);
+                console.log('Redirect URL:', redirectUrl);
+
+                // Update booking status in database
+                if (currentBooking.bookingId) {
+                    const updateData = {
+                        status: paymentStatus,
+                        // payment_transaction_id: transactionId,
+                        // payment_method: paymentMethod,
+                        fee: amount ? parseFloat(amount) / 100 : null, // Convert from cents
+                        // payment_currency: currency,
+                        updated_at: new Date().toISOString()
+                    };
+                    
+                    console.log('Updating booking with data:', updateData);
+                    
+                    const { error: updateError } = await supabaseClient
+                        .from('bookings')
+                        .update(updateData)
+                        .eq('id', currentBooking.bookingId);
+                    
+                    if (updateError) {
+                        console.error('Error updating booking:', updateError);
+                        // Don't throw error here, still redirect to appropriate page
+                    } else {
+                        console.log('Booking updated successfully');
+                    }
+                }
+
+                // Prepare data for success/failure pages
+                const paymentResult = {
+                    success: paymentStatus === 'paid' || paymentStatus === 'pending',
+                    status: paymentStatus,
+                    transactionId: transactionId,
+                    orderId: orderId,
+                    amount: amount ? parseFloat(amount) / 100 : currentBooking.amount,
+                    currency: currency || 'EGP',
+                    paymentMethod: paymentMethod,
+                    bookingData: currentBooking,
+                    responseCode: txnResponseCode,
+                    isPending: pending === 'true'
+                };
+                
+                // Store payment result for the target page
+                sessionStorage.setItem('paymentResult', JSON.stringify(paymentResult));
+                
+                // Clean up current booking data
+                sessionStorage.removeItem('currentBooking');
+                
+                // Redirect to appropriate page
+                console.log(`Redirecting to ${redirectUrl}`);
+                
+                // Add a small delay to ensure everything is processed
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Error processing payment callback:', error);
+                
+                // Show error message
+                const errorContainer = document.getElementById('error-container');
+                errorContainer.innerHTML = `
+                    <div class="error-message">
+                        <strong>Error:</strong> ${error.message}
+                        <br><br>
+                        <a href="/registration.html" style="color: #ffcccb; text-decoration: underline;">
+                            Return to Booking Page
+                        </a>
+                    </div>
+                `;
+                
+                // Still try to redirect to failure page after 5 seconds
+                setTimeout(() => {
+                    const failureUrl = window.PAYMOB_CALLBACK_URLS?.failurePageUrl || '/failure.html';
+                    window.location.href = failureUrl;
+                }, 5000);
+            }
+        }
+
+        // Handle postMessage from PayMob iframe (alternative method)
+        window.addEventListener('message', function(event) {
+            if (event.origin === 'https://accept.paymob.com') {
+                console.log('PayMob postMessage received:', event.data);
+                
+                // Handle the payment result from postMessage if needed
+                if (event.data && typeof event.data === 'object') {
+                    // You can process the postMessage data here if using iframe method
+                    processPaymentResult(event.data);
+                }
+            }
+        });
+
+        // Alternative function to handle postMessage data
+        function processPaymentResult(data) {
+            try {
+                const paymentResult = {
+                    success: data.success || false,
+                    status: data.success ? 'paid' : 'failed',
+                    transactionId: data.id,
+                    orderId: data.order_id,
+                    amount: data.amount_cents ? parseFloat(data.amount_cents) / 100 : 0,
+                    currency: data.currency || 'EGP',
+                    paymentMethod: data.source_data_type,
+                    responseCode: data.txn_response_code
+                };
+                
+                sessionStorage.setItem('paymentResult', JSON.stringify(paymentResult));
+                
+                const redirectUrl = paymentResult.success ? '/success.html' : '/failure.html';
+                window.location.href = redirectUrl;
+                
+            } catch (error) {
+                console.error('Error processing postMessage payment result:', error);
+                window.location.href = '/failure.html';
+            }
+        }
+
+        // Start processing when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure all parameters are loaded
+            setTimeout(processPaymentCallback, 1000);
+        });
+        
+        // Manual test function - you can call this from browser console
+        // Usage: testRedirect('success') or testRedirect('failure')
+        window.testRedirect = function(type) {
+            const testResult = {
+                success: type === 'success',
+                status: type === 'success' ? 'paid' : 'failed',
+                transactionId: 'TEST_' + Date.now(),
+                orderId: 'ORDER_' + Date.now(),
+                amount: 100,
+                currency: 'EGP',
+                paymentMethod: 'card',
+                bookingData: {
+                    bookingId: 'TEST_BOOKING',
+                    serviceName: 'Test Service',
+                    patientName: 'Test Patient'
+                }
+            };
+            
+            sessionStorage.setItem('paymentResult', JSON.stringify(testResult));
+            
+            const redirectUrl = type === 'success' ? 
+                (window.PAYMOB_CALLBACK_URLS?.successPageUrl || '/success.html') : 
+                (window.PAYMOB_CALLBACK_URLS?.failurePageUrl || '/failure.html');
+            
+            console.log('Test redirect to:', redirectUrl);
+            window.location.href = redirectUrl;
+        };
+    </script>
+</body>
+</html>

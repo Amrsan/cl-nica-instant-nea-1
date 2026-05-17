@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Care Services - Insta Clinic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        .features-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            color: #00989D;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            color: #1a5058;
+            font-size: 1.08rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            color: #555;
+            font-size: 0.97rem;
+        }
+
+        .approach-section {
+            padding: 80px 20px;
+        }
+
+        .approach-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .approach-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .approach-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .approach-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .approach-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #1a5058;
+        }
+
+        .approach-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .approach-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .approach-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list li:before {
+            left: auto;
+            right: 0;
+        }
+
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .features-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .approach-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="animal.hero.title">Animal Care Services</h1>
+                <p class="hero-description" data-i18n="animal.hero.desc">
+                    Compassionate veterinary care for your pets and animals. Insta Clinic’s animal care team provides
+                    preventive, emergency, and specialized services to keep your pets healthy and happy at every stage
+                    of life.
+                </p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="animal.hero.cta">Book Animal Care Visit</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="animal.services.title">Our Animal Care Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="animal.services.desc">
+                We offer a full range of veterinary services, from routine checkups and vaccinations to urgent care and
+                advanced diagnostics. Our team is dedicated to providing gentle, effective care for dogs, cats, and
+                other pets.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&w=800&q=80"
+                        alt="Routine Checkups">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="animal.checkups.title">Routine Checkups & Vaccinations</h3>
+                        <p class="service-card-description" data-i18n="animal.checkups.desc">
+                            Comprehensive wellness exams, vaccinations, and preventive care to keep your pets healthy
+                            and protected from disease.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="animal.checkups.l1">Annual wellness exams</li>
+                            <li data-i18n="animal.checkups.l2">Core and non-core vaccinations</li>
+                            <li data-i18n="animal.checkups.l3">Parasite prevention and control</li>
+                            <li data-i18n="animal.checkups.l4">Nutrition and weight management</li>
+                            <li data-i18n="animal.checkups.l5">Dental health checks</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://brightcarevet.com/emergency/wp-content/uploads/sites/3/2019/05/Why-Call-an-Emergency-Vet.jpg"
+                        alt="Emergency Veterinary Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="animal.emergency.title">Emergency Veterinary Care</h3>
+                        <p class="service-card-description" data-i18n="animal.emergency.desc">
+                            Rapid response for injuries, poisoning, allergic reactions, and other urgent conditions
+                            requiring immediate attention.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="animal.emergency.l1">Emergency triage and stabilization</li>
+                            <li data-i18n="animal.emergency.l2">Treatment for trauma and wounds</li>
+                            <li data-i18n="animal.emergency.l3">Poisoning and toxicology management</li>
+                            <li data-i18n="animal.emergency.l4">Seizure and allergic reaction care</li>
+                            <li data-i18n="animal.emergency.l5">24/7 urgent care availability</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&w=800&q=80"
+                        alt="Diagnostics & Lab Tests">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="animal.diagnostics.title">Diagnostics & Lab Tests</h3>
+                        <p class="service-card-description" data-i18n="animal.diagnostics.desc">
+                            Blood tests, imaging, and other diagnostics to accurately assess your pet’s health and guide
+                            treatment.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="animal.diagnostics.l1">Blood and urine analysis</li>
+                            <li data-i18n="animal.diagnostics.l2">X-ray and ultrasound imaging</li>
+                            <li data-i18n="animal.diagnostics.l3">Heartworm and parasite screening</li>
+                            <li data-i18n="animal.diagnostics.l4">Allergy and infectious disease testing</li>
+                            <li data-i18n="animal.diagnostics.l5">Pre-surgical lab work</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="service-card">
+                    <img src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&w=800&q=80"
+                        alt="Surgery & Advanced Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title">Surgery & Advanced Care</h3>
+                        <p class="service-card-description">
+                            Surgical procedures, dental care, and advanced treatments performed by experienced
+                            veterinary professionals.
+                        </p>
+                        <ul class="service-card-list">
+                            <li>Spay and neuter surgery</li>
+                            <li>Soft tissue and orthopedic surgery</li>
+                            <li>Dental cleaning and extractions</li>
+                            <li>Chronic disease management</li>
+                            <li>Pain management and rehabilitation</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-container">
+                <h2 class="section-title" data-i18n="animal.features.title">Why Choose Insta Clinic for Animal Care?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon"><i class="fas fa-home"></i></span>
+                        <h3 class="feature-title" data-i18n="animal.features.f1.title">Home Visits</h3>
+                        <p class="feature-description" data-i18n="animal.features.f1.desc">
+                            Convenient veterinary care in the comfort of your home, reducing stress for both pets and
+                            owners.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><i class="fas fa-stethoscope"></i></span>
+                        <h3 class="feature-title" data-i18n="animal.features.f2.title">Modern Diagnostics</h3>
+                        <p class="feature-description" data-i18n="animal.features.f2.desc">
+                            Access to advanced diagnostic tools and laboratory testing for accurate and timely results.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><i class="fas fa-heartbeat"></i></span>
+                        <h3 class="feature-title" data-i18n="animal.features.f3.title">Emergency Response</h3>
+                        <p class="feature-description" data-i18n="animal.features.f3.desc">
+                            Fast, reliable emergency care for critical situations, available when your pet needs it
+                            most.
+                        </p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><i class="fas fa-paw"></i></span>
+                        <h3 class="feature-title" data-i18n="animal.features.f4.title">Comprehensive Care</h3>
+                        <p class="feature-description" data-i18n="animal.features.f4.desc">
+                            From preventive medicine to surgery and rehabilitation, we cover all aspects of animal
+                            health.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="approach-section">
+            <div class="approach-container">
+                <h2 class="section-title" data-i18n="animal.approach.title">Our Approach to Animal Care</h2>
+                <div class="approach-content">
+                    <div class="approach-image">
+                        <img src="https://images.pexels.com/photos/733416/pexels-photo-733416.jpeg?auto=compress&w=800&q=80"
+                            alt="Animal Care Approach">
+                    </div>
+                    <div class="approach-text">
+                        <h3 data-i18n="animal.approach.subtitle">Gentle, Patient-Focused Veterinary Medicine</h3>
+                        <p data-i18n="animal.approach.desc">
+                            We believe in a compassionate, individualized approach to animal care. Our veterinarians
+                            work closely with pet owners to ensure the best outcomes for every animal.
+                        </p>
+                        <ul class="approach-list">
+                            <li data-i18n="animal.approach.l1">Thorough physical exams and history taking</li>
+                            <li data-i18n="animal.approach.l2">Clear communication and education for owners</li>
+                            <li data-i18n="animal.approach.l3">Minimally invasive procedures when possible</li>
+                            <li data-i18n="animal.approach.l4">Follow-up and ongoing support for chronic conditions</li>
+                            <li data-i18n="animal.approach.l5">Stress-free environment for pets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <!-- <section class="team-section">
+            <div class="team-container">
+                <h2 class="section-title">Our Veterinary Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;">
+                    Our licensed veterinarians and animal care specialists are passionate about animal health and welfare.
+                </p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/623513/pexels-photo-623513.jpeg?auto=compress&w=800&q=80" alt="Dr. Sara Mostafa">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Sara Mostafa</h3>
+                            <p class="team-member-role">Lead Veterinarian</p>
+                            <p class="team-member-bio">Expert in preventive medicine, diagnostics, and surgery for small animals.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/733416/pexels-photo-733416.jpeg?auto=compress&w=800&q=80" alt="Dr. Ahmed El Sayed">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Ahmed El Sayed</h3>
+                            <p class="team-member-role">Emergency Vet Specialist</p>
+                            <p class="team-member-bio">Specializes in emergency and critical care, trauma, and toxicology.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.pexels.com/photos/1404819/pexels-photo-1404819.jpeg?auto=compress&w=800&q=80" alt="Dr. Mona Khalil">
+                        <div class="team-member-info">
+                            <h3 class="team-member-name">Dr. Mona Khalil</h3>
+                            <p class="team-member-role">Diagnostics & Lab Specialist</p>
+                            <p class="team-member-bio">Experienced in laboratory diagnostics and imaging for pets and exotic animals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- CTA Section -->
+        <!-- <section class="cta-section">
+            <div class="cta-container">
+                <h2 class="cta-title">Book Your Animal Care Appointment</h2>
+                <p class="cta-description">
+                    Give your pets the care they deserve. Schedule a visit with our veterinary team today!
+                </p>
+                <a href="#" class="cta-button">Book Now</a>
+            </div>
+        </section> -->
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>

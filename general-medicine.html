@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bytesized&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+
+    <title>General Medicine Services - Insta Clinic</title>
+    <link rel="icon" sizes="32x32" href="/vertical color.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            min-width: unset;
+            background-color: #f9f9f9;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #1a5058;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: #00989D;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta:hover {
+            background-color: #006868;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Service Details Section */
+        .service-details {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #1a5058;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #00989D;
+            margin: 15px auto 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card-content {
+            padding: 25px;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .service-card-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+
+        .service-card-list {
+            margin-top: 18px;
+            padding-left: 18px;
+            color: #00989D;
+            font-size: 0.98rem;
+        }
+
+        /* Treatments Section */
+        .treatments-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .treatments-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .treatment-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .treatment-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .treatment-icon {
+            font-size: 2.5rem;
+            color: #00989D;
+            margin-bottom: 20px;
+        }
+
+        .treatment-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a5058;
+        }
+
+        .treatment-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Before After Section */
+        .before-after-section {
+            padding: 80px 20px;
+        }
+
+        .before-after-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .before-after-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .before-after-images {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .before-after-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .before-after-label {
+            background-color: #1a5058;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-weight: 600;
+        }
+
+        .before-after-content {
+            padding: 20px;
+        }
+
+        .before-after-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1a5058;
+        }
+
+        .before-after-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            background-color: #f0f8f8;
+            padding: 80px 20px;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #1a5058;
+        }
+
+        .team-member-role {
+            color: #00989D;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #00989D;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #00989D;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #1a5058;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .service-grid,
+            .treatments-grid,
+            .before-after-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        .approach-list {
+            list-style: none;
+        }
+
+        .approach-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .approach-list li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00989D;
+            position: absolute;
+            left: 0;
+        }
+
+        [dir="rtl"] .approach-list li {
+            padding-left: 0;
+            padding-right: 30px;
+        }
+        [dir="rtl"] .approach-list li:before {
+            left: auto;
+            right: 0;
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="genmed.hero.title">General Medicine Services</h1>
+                <p class="hero-description" data-i18n="genmed.hero.desc">
+                    Comprehensive primary and preventive care for adults and adolescents. Our experienced general
+                    medicine physicians at Insta Clinic provide expert diagnosis, management, and follow-up for a wide
+                    range of acute and chronic medical conditions, focusing on your long-term health and well-being.
+                </p>
+                <button class="hero-cta" onclick="location.href='registration.html'" data-i18n="genmed.hero.cta">Book a Medical Consultation</button>
+            </div>
+        </section>
+
+        <!-- Service Details Section -->
+        <section class="service-details">
+            <h2 class="section-title" data-i18n="genmed.services.title">Our General Medicine Services</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6;" data-i18n="genmed.services.desc">
+                Insta Clinic offers a full spectrum of general medical services, from preventive health checks to the
+                management of complex chronic diseases. Our team uses evidence-based medicine and a patient-centered
+                approach to ensure the best outcomes for every individual.
+            </p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&w=800&q=80"
+                        alt="Preventive Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="genmed.preventive.title">Preventive Health & Checkups</h3>
+                        <p class="service-card-description" data-i18n="genmed.preventive.desc">
+                            Routine physical exams, health screenings, vaccinations, and lifestyle counseling to help
+                            you stay healthy and detect issues early.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="genmed.preventive.l1">Annual physical examinations</li>
+                            <li data-i18n="genmed.preventive.l2">Blood pressure and cholesterol screening</li>
+                            <li data-i18n="genmed.preventive.l3">Vaccinations and immunizations</li>
+                            <li data-i18n="genmed.preventive.l4">Cancer screening (breast, colon, prostate, etc.)</li>
+                            <li data-i18n="genmed.preventive.l5">Lifestyle and nutrition counseling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/8376293/pexels-photo-8376293.jpeg?auto=compress&w=800&q=80"
+                        alt="Chronic Disease Management">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="genmed.chronic.title">Chronic Disease Management</h3>
+                        <p class="service-card-description" data-i18n="genmed.chronic.desc">
+                            Ongoing care for diabetes, hypertension, asthma, thyroid disorders, and other chronic
+                            conditions, with personalized treatment plans and regular monitoring.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="genmed.chronic.l1">Diabetes and blood sugar management</li>
+                            <li data-i18n="genmed.chronic.l2">Hypertension and heart disease care</li>
+                            <li data-i18n="genmed.chronic.l3">Asthma and COPD management</li>
+                            <li data-i18n="genmed.chronic.l4">Thyroid and hormonal disorder follow-up</li>
+                            <li data-i18n="genmed.chronic.l5">Medication adjustment and monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3845125/pexels-photo-3845125.jpeg?auto=compress&w=800&q=80"
+                        alt="Acute Illness Care">
+                    <div class="service-card-content">
+                        <h3 class="service-card-title" data-i18n="genmed.acute.title">Acute Illness & Symptom Management</h3>
+                        <p class="service-card-description" data-i18n="genmed.acute.desc">
+                            Rapid assessment and treatment for infections, fevers, respiratory illnesses, digestive
+                            complaints, and other acute medical issues.
+                        </p>
+                        <ul class="service-card-list">
+                            <li data-i18n="genmed.acute.l1">Fever and infection evaluation</li>
+                            <li data-i18n="genmed.acute.l2">Respiratory and flu-like illness care</li>
+                            <li data-i18n="genmed.acute.l3">Digestive and urinary symptoms</li>
+                            <li data-i18n="genmed.acute.l4">Minor injuries and wound care</li>
+                            <li data-i18n="genmed.acute.l5">Short-term medication prescriptions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatments Section -->
+        <section class="treatments-section">
+            <div class="treatments-container">
+                <h2 class="section-title" data-i18n="genmed.conditions.title">Common Conditions We Treat</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="genmed.conditions.desc">
+                    Our general medicine team is equipped to diagnose and manage a broad range of health concerns,
+                    providing holistic and continuous care.
+                </p>
+
+                <div class="treatments-grid">
+                    <div class="treatment-item">
+                        <span class="treatment-icon" style="font-size:2.5rem; color:#00989D;">&#129505;</span>
+                        <h3 class="treatment-title" data-i18n="genmed.conditions.c1.title">Hypertension & Heart Disease</h3>
+                        <p class="treatment-description" data-i18n="genmed.conditions.c1.desc">
+                            Blood pressure control, cholesterol management, and cardiovascular risk reduction through
+                            medication and lifestyle guidance.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon" style="font-size:2.5rem; color:#00989D;">&#128137;</span>
+                        <h3 class="treatment-title" data-i18n="genmed.conditions.c2.title">Diabetes Care</h3>
+                        <p class="treatment-description" data-i18n="genmed.conditions.c2.desc">
+                            Comprehensive diabetes management, including medication adjustment, blood sugar monitoring,
+                            and complication prevention.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon" style="font-size:2.5rem; color:#00989D;">&#129730;</span>
+                        <h3 class="treatment-title" data-i18n="genmed.conditions.c3.title">Respiratory & Infectious Diseases</h3>
+                        <p class="treatment-description" data-i18n="genmed.conditions.c3.desc">
+                            Diagnosis and treatment of asthma, bronchitis, pneumonia, flu, COVID-19, and other
+                            respiratory or infectious illnesses.
+                        </p>
+                    </div>
+                    <div class="treatment-item">
+                        <span class="treatment-icon"
+                            style="font-size:2.5rem; color:#00989D;">&#128104;&#8205;&#127891;</span>
+                        <h3 class="treatment-title" data-i18n="genmed.conditions.c4.title">Thyroid & Hormonal Disorders</h3>
+                        <p class="treatment-description" data-i18n="genmed.conditions.c4.desc">
+                            Evaluation and management of thyroid dysfunction, metabolic syndrome, and other endocrine
+                            conditions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Approach Section -->
+        <section class="before-after-section">
+            <div class="before-after-container">
+                <h2 class="section-title" data-i18n="genmed.approach.title">Our Approach to General Medicine</h2>
+                <p
+                    style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; line-height: 1.6; margin-bottom: 40px;" data-i18n="genmed.approach.desc">
+                    We believe in building long-term relationships with our patients, focusing on prevention, education,
+                    and personalized care at every stage of life.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; margin-top: 40px;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&w=800&q=80"
+                            alt="Healthy Lifestyle"
+                            style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #1a5058;" data-i18n="genmed.approach.subtitle">Patient-Centered Medical
+                            Care</h3>
+                        <p style="color: #666; line-height: 1.8; margin-bottom: 20px;" data-i18n="genmed.approach.subdesc">
+                            Our physicians take the time to listen, educate, and involve you in every decision about
+                            your health.
+                        </p>
+                        <ul class="approach-list">
+                            <li
+                                class="approach-list-item" data-i18n="genmed.approach.l1">
+                                
+                                Thorough medical history and physical examination
+                            </li>
+                            <li
+                                class="approach-list-item" data-i18n="genmed.approach.l2">
+                                
+                                Preventive screenings and risk assessment
+                            </li>
+                            <li
+                                class="approach-list-item" data-i18n="genmed.approach.l3">
+                                
+                                Evidence-based diagnosis and treatment
+                            </li>
+                            <li
+                                class="approach-list-item" data-i18n="genmed.approach.l4">
+                                
+                                Coordination with specialists when needed
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <style>
+            .approach-list-item {
+                margin-bottom: 15px;
+                padding-left: 30px;
+                position: relative;
+                color: #666;
+                line-height: 1.6;
+            }
+            .approach-list-item .fas.fa-check-circle {
+                color: #00989D;
+                position: absolute;
+                left: 0;
+            }
+            [dir="rtl"] .approach-list-item {
+                padding-left: 0;
+                padding-right: 30px;
+            }
+            [dir="rtl"] .approach-list-item .fas.fa-check-circle {
+                left: auto;
+                right: 0;
+            }
+        </style>
+    </main>
+
+    <div id="footer"></div>
+    <script src="i18n.js"></script>
+    <script>
+        function loadContent() {
+            // Load header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                    const path = window.location.pathname;
+                    const buttons = document.querySelectorAll('#header .btn');
+
+                    buttons.forEach(btn => {
+                        const btnHref = btn.getAttribute('onclick')?.match(/'(.*?)'/)?.[1];
+                        if (btnHref && path.endsWith(btnHref)) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    // Re-run translation for header
+                    if (window.initI18n) {
+                        window.initI18n();
+                    }
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .finally(() => {
+                    // Re-run translation for footer
+                    if(window.initI18n) window.initI18n();
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadContent);
+        } else {
+            loadContent();
+        }
+    </script>
+</body>
+
+</html>
