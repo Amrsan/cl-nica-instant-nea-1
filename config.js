@@ -17,9 +17,19 @@ window.SUPABASE_CONFIG = SUPABASE_CONFIG;
 // 🔒 API secrets are stored in Supabase Edge Functions
 // =========================
 window.PAYMOB_CONFIG = {
-    apiKey: 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRBek9URTNOQ3dpYm1GdFpTSTZJakUzTlRjMU16STJNVGN1T0RReU16QXhJbjAuX2ZmQTA3X2VYYW9JM1JtLS1Qc3hJMkdidWE3d2w5a0o4cTJVRWlLV3lrSHN4WjNiSjZleEZBTkpBamVNa1cwMjJhdzNPZTg3ZkxSZmtlOTkyNWc3UUE=', // Replace with your API key
-    integrationId: 5238766, // Replace with your integration ID
-    iframeId: 915658,       // Replace with your iframe ID
+    // ── Unified Checkout (Intention API) ──────────────────────────────────────
+    // Get these from PayMob Dashboard → Developers → API Keys
+    secretKey: 'YOUR_PAYMOB_SECRET_KEY', // Replace with your secret key from PayMob Dashboard
+    publicKey: 'egy_pk_live_uwz00OkjQskEbnAitNj4ej8nBgGnLdeA',
+
+    // ── Payment integrations ──────────────────────────────────────────────────
+    // Add each method's Integration ID from:
+    // PayMob Dashboard → Developers → Payment Integrations
+    integrationId:         5155564, // Card / Credit-Debit
+    applePayIntegrationId: 5551502,     // Apple Pay  (replace null with your ID)
+    forsaIntegrationId:    5238766,     // Forsa BNPL (replace null with your ID)
+
+    // ── Legacy / HMAC ─────────────────────────────────────────────────────────
     hmacSecret: 'CBA3CBDDEC037DEA0B4BD7249A9E977E' // Replace with your HMAC secret
 };
 

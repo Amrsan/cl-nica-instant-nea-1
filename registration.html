@@ -609,29 +609,52 @@
 
     <div id="footer"></div>
 
-    <!-- Add this within an iframe instead of redirecting -->
-    <div id="payment-iframe-container" style="display: none;">
-        <iframe id="payment-iframe" width="100%" height="600px" frameborder="0"></iframe>
+    <!-- ====== REDIRECT OVERLAY ====== -->
+    <div id="redirectOverlay" style="
+        display:none; position:fixed; inset:0; z-index:9999;
+        background:rgba(15,50,55,0.82); backdrop-filter:blur(6px);
+        flex-direction:column; align-items:center; justify-content:center;
+        gap:22px; color:#fff; text-align:center; padding:24px;
+        font-family:'Montserrat',sans-serif;">
+        <div style="
+            width:60px; height:60px;
+            border:5px solid rgba(255,255,255,0.25); border-top-color:#fff;
+            border-radius:50%; animation:spin 0.85s linear infinite;">
+        </div>
+        <p style="font-size:1.15rem; font-weight:700; margin:0;">Redirecting to Secure Payment…</p>
+        <p style="font-size:.85rem; opacity:.75; margin:0;">Please do not close or refresh this page.</p>
+        <div style="
+            display:flex; align-items:center; gap:8px;
+            background:rgba(255,255,255,0.12); padding:8px 18px;
+            border-radius:30px; font-size:.8rem; font-weight:600;">
+            <i class="fas fa-shield-alt" style="color:#7ef0f3;"></i>
+            <span>Secured by Paymob</span>
+        </div>
     </div>
 
     <script>
         // Supabase configuration (loaded from config.js)
         const SUPABASE_URL = window.SUPABASE_CONFIG?.url || 'MISSING_CONFIG';
         const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG?.anonKey || 'MISSING_CONFIG';
-        
-        // PayMob configuration - Add these to your config.js file
-        const PAYMOB_API_KEY = window.PAYMOB_CONFIG?.apiKey || 'MISSING_CONFIG';
-        const PAYMOB_INTEGRATION_ID = window.PAYMOB_CONFIG?.integrationId || 'MISSING_CONFIG';
-        const PAYMOB_IFRAME_ID = window.PAYMOB_CONFIG?.iframeId || 'MISSING_CONFIG';
-        const PAYMOB_HMAC_SECRET = window.PAYMOB_CONFIG?.hmacSecret || 'MISSING_CONFIG';
-        
+
+        // PayMob Unified Checkout configuration
+        const PAYMOB_SECRET_KEY = window.PAYMOB_CONFIG?.secretKey;
+        const PAYMOB_PUBLIC_KEY = window.PAYMOB_CONFIG?.publicKey;
+
+        // Collect all active integration IDs (card + Apple Pay + Forsa)
+        const PAYMOB_PAYMENT_METHODS = [
+            window.PAYMOB_CONFIG?.integrationId,
+            window.PAYMOB_CONFIG?.applePayIntegrationId,
+            window.PAYMOB_CONFIG?.forsaIntegrationId
+        ].filter(id => id != null).map(id => parseInt(id));
+
         // Check if config is loaded properly
         if (SUPABASE_URL === 'MISSING_CONFIG' || SUPABASE_ANON_KEY === 'MISSING_CONFIG') {
             console.error('Supabase configuration not loaded! Please ensure config.js exists and is properly configured.');
         }
-        
-        if (PAYMOB_API_KEY === 'MISSING_CONFIG' || PAYMOB_INTEGRATION_ID === 'MISSING_CONFIG') {
-            console.error('PayMob configuration not loaded! Please ensure config.js exists and is properly configured.');
+
+        if (!PAYMOB_SECRET_KEY || !PAYMOB_PUBLIC_KEY) {
+            console.error('PayMob configuration not loaded! Please ensure config.js has secretKey and publicKey set.');
         }
         
         // Initialize Supabase client
@@ -659,7 +682,7 @@
         }
 
         // Function to load the header and footer
-        window.onload = function loadContent() {
+        function loadContent() {
             const headerPromise = fetch('header.html').then(res => res.text());
             const footerPromise = fetch('footer.html').then(res => res.text());
 
@@ -670,7 +693,6 @@
                 })
                 .catch(error => console.error('Error loading header/footer:', error))
                 .finally(() => {
-                    // Apply translations after all content is loaded
                     if (window.initI18n) window.initI18n();
                 });
 
@@ -681,6 +703,7 @@
             // Load services from Supabase
             loadServices();
         }
+        window.onload = loadContent;
 
         // Function to load services from Supabase
         async function loadServices() {
@@ -1070,144 +1093,83 @@
             messageDiv.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // PayMob integration functions
+        /* ───── PayMob Unified Checkout (Intention API) ───── */
+
+        /**
+         * Creates a payment intention then redirects to PayMob's
+         * hosted Unified Checkout page.
+         */
         async function initiatePayMobPayment(bookingData) {
+            showRedirectOverlay();
             try {
-                // Step 1: Get authentication token
-                const authToken = await getPayMobAuthToken();
-                
-                // Step 2: Create order
-                const orderId = await createPayMobOrder(authToken, bookingData);
-                
-                // Step 3: Get payment key
-                const paymentKey = await getPayMobPaymentKey(authToken, orderId, bookingData);
-                
-                // Step 4: Redirect to PayMob iframe
-                redirectToPayMobIframe(paymentKey);
-                
-            } catch (error) {
-                console.error('PayMob payment initiation failed:', error);
-                showMessage(getTranslation('reg.js.error.payment_init'), 'error');
-            }
-        }
+                const amountCents = Math.round(parseFloat(bookingData.amount) * 100);
+                const nameParts   = bookingData.patientName.split(' ');
+                const phone       = document.getElementById('phone')?.value || 'NA';
 
-        async function getPayMobAuthToken() {
-            const response = await fetch('https://accept.paymob.com/api/auth/tokens', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    api_key: PAYMOB_API_KEY
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Failed to get PayMob auth token: ' + (data.message || 'Unknown error'));
-            }
-            
-            return data.token;
-        }
-
-        async function createPayMobOrder(authToken, bookingData) {
-            const amountCents = Math.round(parseFloat(bookingData.amount) * 100); // Convert to cents
-            
-            const response = await fetch('https://accept.paymob.com/api/ecommerce/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    auth_token: authToken,
-                    delivery_needed: "false",
-                    amount_cents: amountCents,
-                    currency: "EGP",
-                    items: [{
-                        name: bookingData.serviceName,
-                        amount_cents: amountCents,
-                        description: `Medical appointment booking - ${bookingData.serviceName}`,
-                        quantity: 1
-                    }]
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Failed to create PayMob order: ' + (data.message || 'Unknown error'));
-            }
-            
-            return data.id;
-        }
-
-        async function getPayMobPaymentKey(authToken, orderId, bookingData) {
-            const amountCents = Math.round(parseFloat(bookingData.amount) * 100);
-            
-            // Get contact number from current form if available
-            const contactNumber = document.getElementById('phone')?.value || "+20XXXXXXXXX";
-            
-            const response = await fetch('https://accept.paymob.com/api/acceptance/payment_keys', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    auth_token: authToken,
-                    amount_cents: amountCents,
-                    expiration: 3600, // 1 hour
-                    order_id: orderId,
-                    billing_data: {
-                        apartment: "NA",
-                        email: "customer@example.com", // You may want to add email field to your form
-                        floor: "NA",
-                        first_name: bookingData.patientName.split(' ')[0],
-                        street: "NA",
-                        building: "NA",
-                        phone_number: contactNumber,
-                        shipping_method: "NA",
-                        postal_code: "NA",
-                        city: "Cairo",
-                        country: "EG",
-                        last_name: bookingData.patientName.split(' ').slice(1).join(' ') || "N/A",
-                        state: "Cairo"
+                const res = await fetch('https://accept.paymob.com/v1/intention/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${PAYMOB_SECRET_KEY}`
                     },
-                    currency: "EGP",
-                    integration_id: PAYMOB_INTEGRATION_ID,
-                    lock_order_when_paid: "false"
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                throw new Error('Failed to get PayMob payment key: ' + (data.message || 'Unknown error'));
+                    body: JSON.stringify({
+                        amount: amountCents,
+                        currency: 'EGP',
+                        payment_methods: PAYMOB_PAYMENT_METHODS,
+                        items: [{
+                            name: bookingData.serviceName,
+                            amount: amountCents,
+                            description: `Medical booking – ${bookingData.serviceName}`,
+                            quantity: 1
+                        }],
+                        billing_data: {
+                            first_name:      nameParts[0] || 'NA',
+                            last_name:       nameParts.slice(1).join(' ') || 'NA',
+                            phone_number:    phone,
+                            email:           'booking@instaclinic.com',
+                            apartment:       'NA',
+                            floor:           'NA',
+                            street:          'NA',
+                            building:        'NA',
+                            city:            'Cairo',
+                            country:         'EG',
+                            state:           'Cairo',
+                            postal_code:     'NA',
+                            shipping_method: 'NA'
+                        },
+                        special_reference: String(bookingData.bookingId),
+                        notification_url:  window.PAYMOB_CALLBACK_URLS?.callbackUrl,
+                        redirection_url:   window.PAYMOB_CALLBACK_URLS?.callbackUrl
+                    })
+                });
+
+                const data = await res.json();
+                if (!res.ok) throw new Error('Intention failed: ' + (data.detail || data.message || JSON.stringify(data)));
+
+                const checkoutUrl = `https://accept.paymob.com/unifiedcheckout/?publicKey=${PAYMOB_PUBLIC_KEY}&clientSecret=${data.client_secret}`;
+                window.location.href = checkoutUrl;
+
+            } catch (error) {
+                hideRedirectOverlay();
+                console.error('PayMob Unified Checkout error:', error);
+                showMessage(getTranslation('reg.js.error.payment_init'), 'error');
+                // Re-enable the submit button
+                const submitButton = document.querySelector('.submit-button');
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = getTranslation('reg.form.submit');
+                }
             }
-            
-            return data.token;
         }
 
-        function redirectToPayMobIframe(paymentKey) {
-            // Store the current booking data for callback processing
-            const currentBooking = JSON.parse(sessionStorage.getItem('currentBooking'));
-            
-            // Add additional metadata for callback processing
-            const enhancedBookingData = {
-                ...currentBooking,
-                paymentKey: paymentKey,
-                timestamp: new Date().toISOString()
-            };
-            
-            sessionStorage.setItem('currentBooking', JSON.stringify(enhancedBookingData));
-            
-            // Create the PayMob iframe URL
-            const iframeUrl = `https://accept.paymob.com/api/acceptance/iframes/${PAYMOB_IFRAME_ID}?payment_token=${paymentKey}`;
-            
-            console.log('Redirecting to PayMob iframe:', iframeUrl);
-            
-            // Direct redirect to PayMob payment page
-            window.location.href = iframeUrl;
+        function showRedirectOverlay() {
+            document.getElementById('redirectOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideRedirectOverlay() {
+            document.getElementById('redirectOverlay').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         // Start initialization when DOM is ready

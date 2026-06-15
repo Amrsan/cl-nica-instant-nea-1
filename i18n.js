@@ -745,6 +745,27 @@
       'reg.js.error.permission': 'Permission denied. Please contact support.',
       'reg.js.error.network': 'Network error. Please check your internet connection and try again.',
 
+      // Checkout Page
+      'checkout.title': 'Complete Your Booking',
+      'checkout.subtitle': 'Review your service details and fill in your information to book your appointment.',
+      'checkout.step1': 'Choose Service',
+      'checkout.step2': 'Your Details',
+      'checkout.step3': 'Pick Date & Time',
+      'checkout.service_label': 'Service Type *',
+      'checkout.service_loading': 'Loading services...',
+      'checkout.time_label': 'Preferred Time *',
+      'checkout.pay_btn': 'Pay & Book Appointment',
+      'checkout.summary_title': 'Order Summary',
+      'checkout.summary_service': 'Service',
+      'checkout.summary_duration': 'Duration',
+      'checkout.summary_date': 'Date',
+      'checkout.summary_time': 'Time',
+      'checkout.summary_total': 'Total',
+      'checkout.secure': 'Secured with 256-bit encryption',
+      'checkout.modal_title': 'Secure Payment',
+      'checkout.modal_amount': 'Amount to Pay',
+      'checkout.modal_loading': 'Loading payment gateway...',
+
       // Service Names (for registration page)
       'service.emergency': 'Emergency',
       'service.home_nursing': 'Home Nursing',
@@ -1512,9 +1533,28 @@
       'service.general_surgery': 'جراحة عامة',
       'service.dermatology': 'الجلدية',
       'service.animal_care': 'رعاية الحيوانات',
-      'service.nutrition': 'التغذية'
+      'service.nutrition': 'التغذية',
 
-
+      // Checkout Page
+      'checkout.title': 'أكمل حجزك',
+      'checkout.subtitle': 'راجع تفاصيل خدمتك واملأ معلوماتك لحجز موعدك.',
+      'checkout.step1': 'اختر الخدمة',
+      'checkout.step2': 'بياناتك',
+      'checkout.step3': 'اختر التاريخ والوقت',
+      'checkout.service_label': 'نوع الخدمة *',
+      'checkout.service_loading': 'جاري تحميل الخدمات...',
+      'checkout.time_label': 'الوقت المفضل *',
+      'checkout.pay_btn': 'ادفع واحجز الموعد',
+      'checkout.summary_title': 'ملخص الطلب',
+      'checkout.summary_service': 'الخدمة',
+      'checkout.summary_duration': 'المدة',
+      'checkout.summary_date': 'التاريخ',
+      'checkout.summary_time': 'الوقت',
+      'checkout.summary_total': 'الإجمالي',
+      'checkout.secure': 'محمي بتشفير 256 بت',
+      'checkout.modal_title': 'الدفع الآمن',
+      'checkout.modal_amount': 'المبلغ المطلوب',
+      'checkout.modal_loading': 'جاري تحميل بوابة الدفع...'
     }
   };
 
