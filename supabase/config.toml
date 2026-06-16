@@ -1,0 +1,2 @@
+[functions.create-paymob-intention]
+verify_jwt = false
