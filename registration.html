@@ -1117,7 +1117,18 @@
                     }
                 });
 
-                if (error) throw new Error('Intention failed: ' + (error.message || JSON.stringify(error)));
+                if (error) {
+                    let errMsg = error.message;
+                    if (error.context) {
+                        try {
+                            const errBody = await error.context.json();
+                            if (errBody && errBody.error) {
+                                errMsg = errBody.error;
+                            }
+                        } catch (e) {}
+                    }
+                    throw new Error('Intention failed: ' + errMsg);
+                }
                 if (!data || !data.client_secret) throw new Error('Failed to retrieve client secret from payment function.');
 
                 const checkoutUrl = `https://accept.paymob.com/unifiedcheckout/?publicKey=${PAYMOB_PUBLIC_KEY}&clientSecret=${data.client_secret}`;
