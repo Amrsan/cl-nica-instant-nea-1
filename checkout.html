@@ -347,7 +347,6 @@
     <script>
         const SUPABASE_URL = window.SUPABASE_CONFIG?.url;
         const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG?.anonKey;
-        const PAYMOB_SECRET_KEY = window.PAYMOB_CONFIG?.secretKey;
         const PAYMOB_PUBLIC_KEY = window.PAYMOB_CONFIG?.publicKey;
 
         // Collect all active integration IDs (card + Apple Pay + Forsa)
@@ -598,58 +597,30 @@
         /* ───────── PayMob Unified Checkout (Intention API) ───────── */
 
         /**
-         * Creates a payment intention via the PayMob Intention API, then
+         * Creates a payment intention via the Supabase Edge Function, then
          * redirects the browser to PayMob's hosted Unified Checkout page.
          */
         async function redirectToPayMobCheckout(bookingData) {
             showRedirectOverlay();
             try {
                 const amountCents = Math.round(parseFloat(bookingData.amount) * 100);
-                const nameParts   = bookingData.patientName.split(' ');
                 const phone       = document.getElementById('phone')?.value || 'NA';
 
-                // Step 1 — Create payment intention
-                const res = await fetch('https://accept.paymob.com/v1/intention/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Token ${PAYMOB_SECRET_KEY}`
-                    },
-                    body: JSON.stringify({
+                // Step 1 — Create payment intention via Edge Function
+                const { data, error } = await supabaseClient.functions.invoke('create-paymob-intention', {
+                    body: {
                         amount: amountCents,
-                        currency: 'EGP',
-                        payment_methods: PAYMOB_PAYMENT_METHODS,
-                        items: [{
-                            name: bookingData.serviceName,
-                            amount: amountCents,
-                            description: `Medical booking – ${bookingData.serviceName}`,
-                            quantity: 1
-                        }],
-                        billing_data: {
-                            first_name:      nameParts[0] || 'NA',
-                            last_name:       nameParts.slice(1).join(' ') || 'NA',
-                            phone_number:    phone,
-                            email:           'booking@instaclinic.com',
-                            apartment:       'NA',
-                            floor:           'NA',
-                            street:          'NA',
-                            building:        'NA',
-                            city:            'Cairo',
-                            country:         'EG',
-                            state:           'Cairo',
-                            postal_code:     'NA',
-                            shipping_method: 'NA'
-                        },
-                        // special_reference carries the bookingId so paymob-callback.html
-                        // can identify the booking from the merchant_order_id URL param.
-                        special_reference: String(bookingData.bookingId),
-                        notification_url:  window.PAYMOB_CALLBACK_URLS?.callbackUrl,
-                        redirection_url:   window.PAYMOB_CALLBACK_URLS?.callbackUrl
-                    })
+                        paymentMethods: PAYMOB_PAYMENT_METHODS,
+                        serviceName: bookingData.serviceName,
+                        bookingId: bookingData.bookingId,
+                        patientName: bookingData.patientName,
+                        phone: phone,
+                        callbackUrl: window.PAYMOB_CALLBACK_URLS?.callbackUrl
+                    }
                 });
 
-                const data = await res.json();
-                if (!res.ok) throw new Error('Intention failed: ' + (data.detail || data.message || JSON.stringify(data)));
+                if (error) throw new Error('Intention failed: ' + (error.message || JSON.stringify(error)));
+                if (!data || !data.client_secret) throw new Error('Failed to retrieve client secret from payment function.');
 
                 // Step 2 — Redirect to Unified Checkout
                 const clientSecret  = data.client_secret;
