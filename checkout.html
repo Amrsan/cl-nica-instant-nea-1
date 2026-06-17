@@ -24,14 +24,15 @@
 
         .checkout-hero {
             background: linear-gradient(135deg, #1a5058 0%, #00989D 100%);
-            color: white; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden;
+            color: white; padding: 60px 20px 85px; text-align: center; position: relative; overflow: hidden;
         }
         .checkout-hero::after {
             content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
             height: 60px; background: #f4f6f8; border-radius: 50% 50% 0 0;
+            z-index: 1;
         }
-        .checkout-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-        .checkout-hero p { font-size: 1rem; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+        .checkout-hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; position: relative; z-index: 2; }
+        .checkout-hero p { font-size: 1rem; opacity: 0.9; max-width: 500px; margin: 0 auto; position: relative; z-index: 2; }
 
         .checkout-layout {
             max-width: 1100px; margin: -20px auto 60px; padding: 0 20px;
@@ -300,7 +301,7 @@
 
             <!-- Order Summary Sidebar -->
             <aside class="order-summary" id="orderSummary">
-                <h3><i class="fas fa-receipt"></i> <span data-i18n="checkout.summary_title">Order Summary</span></h3>
+                <h3><i class="fas fa-receipt"></i> <span data-i18n="checkout.summary_title">Booking Summary</span></h3>
                 <div class="summary-items">
                     <div class="summary-row">
                         <span class="summary-label" data-i18n="checkout.summary_service">Service</span>
