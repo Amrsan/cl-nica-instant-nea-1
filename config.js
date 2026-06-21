@@ -27,7 +27,7 @@ window.PAYMOB_CONFIG = {
   // Add each method's Integration ID from:
   // PayMob Dashboard → Developers → Payment Integrations
   integrationId: 5155564, // Card / Credit-Debit
-  // applePayIntegrationId: 5551502, // Apple Pay  (replace null with your ID)
+  applePayIntegrationId: 5551502, // Apple Pay  (replace null with your ID)
   forsaIntegrationId: 5238766, // Forsa BNPL (replace null with your ID)
 
   // ── Legacy / HMAC ─────────────────────────────────────────────────────────
